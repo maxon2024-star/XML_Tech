@@ -1,0 +1,61 @@
+/* Общий стиль для всех элементов */
+product {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
+
+/* Стиль для названия продукта */
+name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Стиль для описания продукта */
+description {
+    font-size: 16px;
+    color: #666;
+    margin-top: 10px;
+}
+
+/* Стиль для цены */
+price {
+    font-size: 18px;
+    color: green;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Стиль для доступности */
+availability {
+    font-size: 14px;
+    color: blue;
+    margin-top: 5px;
+}
+
+/* Стиль для характеристик (уровень 3) */
+details specification:nth-child(1) {
+    font-size: 14px;
+    color: #007BFF;
+    margin-top: 10px;
+}
+
+details specification:nth-child(2) {
+    font-size: 14px;
+    color: #28A745;
+    margin-top: 5px;
+}
+
+details specification:nth-child(3) {
+    font-size: 14px;
+    color: #DC3545;
+    margin-top: 5px;
+}
+
+details specification:nth-child(4) {
+    font-size: 14px;
+    color: #FD7E14;
+    margin-top: 5px;
+}
