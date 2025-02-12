@@ -71,3 +71,34 @@
   </div>
 </body>
 </html>
+
+<script>
+    // Функция для переключения темы
+    function toggleTheme() {
+      const body = document.body;
+      body.classList.toggle('light-theme'); // Переключаем класс light-theme
+  
+      // Сохраняем текущую тему в localStorage
+      if (body.classList.contains('light-theme')) {
+        localStorage.setItem('theme', 'light');
+      } else {
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+  
+    // Проверяем сохраненную тему при загрузке страницы
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme');
+      const body = document.body;
+  
+      if (savedTheme === 'light') {
+        body.classList.add('light-theme'); // Применяем светлую тему
+      } else {
+        body.classList.remove('light-theme'); // Оставляем темную тему
+      }
+  
+      // Назначаем обработчик события для кнопки
+      const themeToggleBtn = document.getElementById('theme-toggle');
+      themeToggleBtn.addEventListener('click', toggleTheme);
+    });
+  </script>

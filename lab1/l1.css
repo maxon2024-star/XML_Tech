@@ -51,7 +51,7 @@ mark {
     font-size: 2rem;
     font-weight: bold; /* Сделать шрифт более толстым */
     border-radius: 10px; /* Скругленные края */
-    font-family: 'Courier New', monospace; /* Поменять шрифт цифр */
+    font-family: 'Segoe UI', sans-serif; /* Поменять шрифт цифр */
     overflow: hidden; /* Чтобы текст не выходил за пределы */
 }
 
