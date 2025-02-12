@@ -119,28 +119,49 @@ mark {
 }
 
 /* Задание 12: Смена темы */
+/* Светлая тема */
 body.light-theme {
     background-color: #f5f5f5;
     color: black;
 }
 
 body.light-theme .calculator {
-    background-color: #fff;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 body.light-theme .result {
     background: #f0f0f0;
     color: #000;
+    border: 1px solid #ccc;
 }
 
 body.light-theme .my-btn {
-    background: #ddd;
+    background: #e0e0e0;
+    color: #000;
+    border: 1px solid #ccc;
+}
+
+body.light-theme .my-btn:hover {
+    background: #f0f0f0;
 }
 
 body.light-theme .primary {
-    background: #0078d4;
+    background: #0078d4; /* Голубой цвет Microsoft */
+    color: white;
+    border: none;
+}
+
+body.light-theme .primary:hover {
+    background: #005bb5; /* Темнее при наведении */
 }
 
 body.light-theme .secondary {
-    background: #ccc;
+    background: #cccccc;
+    color: #000;
+    border: 1px solid #aaa;
+}
+
+body.light-theme .secondary:hover {
+    background: #e0e0e0;
 }
