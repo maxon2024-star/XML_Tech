@@ -3,7 +3,7 @@ body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif; /* Шрифт Microsoft */
     background-color: #121212; /* Темный фон */
-    color: white;
+    color: rgb(255, 255, 255);
     display: flex;
     justify-content: center; /* Горизонтальное центрирование */
     align-items: center; /* Вертикальное центрирование */
@@ -47,7 +47,7 @@ mark {
     padding-right: 10px;
     background: #333;
     text-align: right;
-    color: #00ff00; /* Зеленый текст */
+    color: rgb(255, 255, 255); /* Зеленый текст */
     font-size: 2rem;
     font-weight: bold; /* Сделать шрифт более толстым */
     border-radius: 10px; /* Скругленные края */
@@ -89,12 +89,13 @@ mark {
 }
 
 .execute {
-    width: 160px;
+    width: 130px;
     border-radius: 5px; /* Легкое скругление */
 }
 
 .zero {
-    width: 100px;
+    margin: 5px;
+    width: 85 px;
 }
 
 /* Задание 13: Сделать шрифт тоньше */
@@ -117,7 +118,15 @@ mark {
     font-size: 0.9rem;
     color: #bbb;
 }
-
+.my-select {
+    width: 160px;
+    padding: 10px;
+    margin: 15px 0;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+  }
+  
 /* Задание 12: Смена темы */
 /* Светлая тема */
 body.light-theme {

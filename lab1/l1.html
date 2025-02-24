@@ -39,14 +39,14 @@
             <button id="btn_digit_4" class="my-btn">4</button>
             <button id="btn_digit_5" class="my-btn">5</button>
             <button id="btn_digit_6" class="my-btn">6</button>
-          <button id="btn_op_minus" class="my-btn primary">-</button>
+            <button id="btn_op_minus" class="my-btn primary">-</button>
         </div>
 
         <div>
             <button id="btn_digit_1" class="my-btn">1</button>
             <button id="btn_digit_2" class="my-btn">2</button>
             <button id="btn_digit_3" class="my-btn">3</button>
-          <button id="btn_op_plus" class="my-btn primary">+</button>
+            <button id="btn_op_plus" class="my-btn primary">+</button>
         </div>
 
         <div>
@@ -55,16 +55,27 @@
            <button id="btn_op_equal" class="my-btn primary execute">=</button>
         </div>
       </div>
+
+      <!-- Добавляем выпадающий список -->
+      <select id="calc-dropdown" class="my-select">
+        <option value="standard">Стандартный режим</option>
+        <option value="scientific">Научный режим</option>
+        <option value="programmer">Режим программиста</option>
+      </select>
+
       <!-- Задание 18: Сворачивающиеся и разворачивающиеся подробности -->
       <details>
         <summary>Автор</summary>
         <p>ФИО: Задеба Максим Алексеевич</p>
         <p>Группа: ИУ5-45Б</p>
       </details>
+
       <!-- Задание 16: Кнопка со ссылкой на GitHub -->
-      <a href="https://github.com/maxon2024-star/XML_Tech" target="_blank" class="github-link">GitHub</a>
+      <button class="github-link" onclick="window.open('https://github.com/maxon2024-star/XML_Tech', '_blank')">GitHub</button>
+
       <!-- Задание 12: Кнопка для смены темы -->
       <button id="theme-toggle">Сменить тему</button>
+      
       <!-- Задание 9: Надпись внизу -->
       <p class="footer">ЛР выполнена Задебой Максимом Алексеевичем</p>
     </div>
@@ -73,32 +84,32 @@
 </html>
 
 <script>
-    // Функция для переключения темы
-    function toggleTheme() {
-      const body = document.body;
-      body.classList.toggle('light-theme'); // Переключаем класс light-theme
-  
-      // Сохраняем текущую тему в localStorage
-      if (body.classList.contains('light-theme')) {
-        localStorage.setItem('theme', 'light');
-      } else {
-        localStorage.setItem('theme', 'dark');
-      }
+  // Функция для переключения темы
+  function toggleTheme() {
+    const body = document.body;
+    body.classList.toggle('light-theme'); // Переключаем класс light-theme
+
+    // Сохраняем текущую тему в localStorage
+    if (body.classList.contains('light-theme')) {
+      localStorage.setItem('theme', 'light');
+    } else {
+      localStorage.setItem('theme', 'dark');
     }
-  
-    // Проверяем сохраненную тему при загрузке страницы
-    document.addEventListener('DOMContentLoaded', () => {
-      const savedTheme = localStorage.getItem('theme');
-      const body = document.body;
-  
-      if (savedTheme === 'light') {
-        body.classList.add('light-theme'); // Применяем светлую тему
-      } else {
-        body.classList.remove('light-theme'); // Оставляем темную тему
-      }
-  
-      // Назначаем обработчик события для кнопки
-      const themeToggleBtn = document.getElementById('theme-toggle');
-      themeToggleBtn.addEventListener('click', toggleTheme);
-    });
-  </script>
+  }
+
+  // Проверяем сохраненную тему при загрузке страницы
+  document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme');
+    const body = document.body;
+
+    if (savedTheme === 'light') {
+      body.classList.add('light-theme'); // Применяем светлую тему
+    } else {
+      body.classList.remove('light-theme'); // Оставляем темную тему
+    }
+
+    // Назначаем обработчик события для кнопки переключения темы
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    themeToggleBtn.addEventListener('click', toggleTheme);
+  });
+</script>
