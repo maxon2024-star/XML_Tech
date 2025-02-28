@@ -1,0 +1,176 @@
+/* Общие стили */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif; /* Шрифт Microsoft */
+    background-color: #121212; /* Темный фон */
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center; /* Горизонтальное центрирование */
+    align-items: center; /* Вертикальное центрирование */
+    height: 100vh; /* Полная высота экрана */
+    overflow: hidden; /* Убираем полосы прокрутки, если они появляются */
+}
+
+.calculator-container {
+    text-align: center;
+    width: 100%; /* Занимает всю ширину */
+    max-width: 400px; /* Ограничение ширины для адаптивности */
+}
+.goal {
+    margin-bottom: 20px;
+}
+
+mark {
+    background-color: #0078d4;
+    color: black;
+}
+
+/* Задание 10: Выровнять калькулятор по центру */
+/* Калькулятор */
+.calculator {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    width: 100%; /* Занимает всю ширину контейнера */
+    max-width: 350px; /* Максимальная ширина */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Задание 4: Изменить цвет вывода результата */
+.result {
+    width: 100%;
+    height: 70px; /* Увеличить размер окна вывода */
+    margin-bottom: 15px;
+    padding-right: 10px;
+    background: #333;
+    text-align: right;
+    color: rgb(255, 255, 255); /* Зеленый текст */
+    font-size: 2rem;
+    font-weight: bold; /* Сделать шрифт более толстым */
+    border-radius: 10px; /* Скругленные края */
+    font-family: 'Segoe UI', sans-serif; /* Поменять шрифт цифр */
+    overflow: hidden; /* Чтобы текст не выходил за пределы */
+}
+
+/* Задание 3: Квадратные кнопки */
+.my-btn {
+    margin: 5px;
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 5px; /* Легкое скругление */
+    background: #515151;
+    color: white;
+    font-size: 1.5rem;
+    font-family: 'Segoe UI', sans-serif;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.3s ease; /* Плавное изменение цвета */
+}
+
+.my-btn:hover {
+    background: #666; /* Изменить цвет при наведении */
+}
+
+.my-btn:active {
+    filter: brightness(130%);
+}
+
+/* Задание 1: Новая цветовая палитра */
+.primary {
+    background: #0078d4; /* Голубой цвет Microsoft */
+}
+
+.secondary {
+    background: #607d8b; /* Серо-голубой */
+}
+
+.execute {
+    width: 130px;
+    border-radius: 5px; /* Легкое скругление */
+}
+
+.zero {
+    margin: 5px;
+    width: 85 px;
+}
+
+/* Задание 13: Сделать шрифт тоньше */
+.github-link {
+    display: block;
+    margin-top: 10px;
+    font-size: 1rem;
+    font-weight: lighter;
+    color: #00bcd4;
+    text-decoration: none;
+}
+
+.github-link:hover {
+    text-decoration: underline;
+}
+
+/* Задание 14: Сменить цвет шрифта */
+.footer {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #bbb;
+}
+.my-select {
+    width: 160px;
+    padding: 10px;
+    margin: 15px 0;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+  }
+  
+/* Задание 12: Смена темы */
+/* Светлая тема */
+body.light-theme {
+    background-color: #f5f5f5;
+    color: black;
+}
+
+body.light-theme .calculator {
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .result {
+    background: #f0f0f0;
+    color: #000;
+    border: 1px solid #ccc;
+}
+
+body.light-theme .my-btn {
+    background: #e0e0e0;
+    color: #000;
+    border: 1px solid #ccc;
+}
+
+body.light-theme .my-btn:hover {
+    background: #f0f0f0;
+}
+
+body.light-theme .primary {
+    background: #0078d4; /* Голубой цвет Microsoft */
+    color: white;
+    border: none;
+}
+
+body.light-theme .primary:hover {
+    background: #005bb5; /* Темнее при наведении */
+}
+
+body.light-theme .secondary {
+    background: #cccccc;
+    color: #000;
+    border: 1px solid #aaa;
+}
+
+body.light-theme .secondary:hover {
+    background: #e0e0e0;
+}
