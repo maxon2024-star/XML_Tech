@@ -4,10 +4,18 @@ export class FilterButtonsComponent {
     }
 
     getHTML(filters, activeFilter) {
+        // Маппинг категорий на английский
+        const categoryMapping = {
+            "Все": "Все",
+            "Пейзажи": "landscapes",
+            "Портреты": "portraits",
+            "Стиль": "fashion"
+        };
+
         return filters.map(filter => `
             <button 
-                class="filter-button ${filter === activeFilter ? 'active' : ''}"
-                data-filter="${filter}"
+                class="filter-button ${categoryMapping[filter] === activeFilter ? 'active' : ''}"
+                data-filter="${categoryMapping[filter]}"
             >
                 ${filter}
             </button>
@@ -15,7 +23,7 @@ export class FilterButtonsComponent {
     }
 
     render(filters, listener) {
-        const html = this.getHTML(filters, "Все");
+        const html = this.getHTML(filters, "all"); // Начальная активная категория на английском
         this.parent.innerHTML = html;
 
         this.parent.querySelectorAll('.filter-button').forEach(button => {
