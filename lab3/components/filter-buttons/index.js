@@ -7,7 +7,7 @@ export class FilterButtonsComponent {
     getHTML(filters, activeFilter) {
         // Маппинг категорий на английский
         const categoryMapping = {
-            "Все": "Все",
+            "Все": "all",
             "Браузер": "browser",
             "Облако": "cloud",
             "Заметки": "note"
@@ -24,7 +24,7 @@ export class FilterButtonsComponent {
     }
 
     render(filters, listener) {
-        const html = this.getHTML(filters, "Все"); // Начальная активная категория на английском
+        const html = this.getHTML(filters, "all"); // Начальная активная категория на английском
         this.parent.innerHTML = html;
 
         this.parent.querySelectorAll('.filter-button').forEach(button => {

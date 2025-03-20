@@ -60,7 +60,7 @@ export class PhotoPage {
         const filterButtons = new FilterButtonsComponent(this.pageRoot.querySelector('.filter-buttons'));
         filterButtons.render(filters, this.onFilterChange.bind(this));
 
-        this.showFilteredPhotos(data, "Все");
+        this.showFilteredPhotos(data, "all");
         
         // Добавляем кнопку "Назад"
         const backButtonContainer = this.pageRoot.querySelector('.back-button-container');
@@ -78,7 +78,7 @@ export class PhotoPage {
         gallery.innerHTML = ''; // Очистка галереи
         
         photos.forEach(photo => {
-            if (filter === "Все" || photo.category === filter) {
+            if (filter === "all" || photo.category === filter) {
                 const card = new PhotoCardComponent(gallery);
                 card.render(photo, this.onClickCard.bind(this));
             }
