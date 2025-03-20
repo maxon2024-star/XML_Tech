@@ -15,21 +15,21 @@ export class PhotoPage {
                 id: 1,
                 src: "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/gldn-MSFT-CP-Edge?wid=297&hei=167&fit=crop",
                 title: "Microsoft Edge",
-                category: "Браузер",
+                category: "browser",
                 description: "Потрясающая производительность, больше конфиденциальности, продуктивности и дополнительных возможностей."
             },
             {
                 id: 2,
                 src: "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/gldn-Soft-CP-OneDriveCampaignRefresh-2?wid=297&hei=167&fit=crop",
                 title: "Microsoft OneDrive",
-                category: "Облако",
+                category: "cloud",
                 description: "Сохраняйте свои файлы и фотографии на OneDrive — они будут доступны с любого устройства и где угодно."
             },
             {
                 id: 3,
                 src: "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-SMB-OneNote?wid=297&hei=167&fit=crop",
                 title: "OneNote",
-                category: "Заметки",
+                category: "note",
                 description: "Приведите свои заметки и дела в порядок."
             }
         ];
