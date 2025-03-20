@@ -46,6 +46,11 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     transition: transform 0.2s;
     width: 250px;
+    height: 400px; /* Фиксированная высота карточки */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative; /* Добавляем относительное позиционирование */
 }
 
 .photo-card:hover {
@@ -62,11 +67,33 @@ body {
     border-top-right-radius: 4px;
 }
 
-/* Кнопки */
-.btn-primary {
+/* Контейнер для текста и кнопки */
+.photo-card .card-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 20px; /* Добавляем отступ для кнопки */
+}
+
+/* Кнопка "Подробнее" */
+.photo-card .btn-primary {
     background-color: #0078D4;
     color: white;
     padding: 8px 16px;
     border-radius: 4px;
     cursor: pointer;
+    width: 100%; /* Кнопка занимает всю ширину карточки */
+    position: absolute; /* Абсолютное позиционирование */
+    bottom: 16px; /* Расположение кнопки внизу */
+    left: 16px; /* Отступ слева */
+    right: 16px; /* Отступ справа */
+}
+
+/* Главная страница: Галерея карточек */
+.main-page {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
 }

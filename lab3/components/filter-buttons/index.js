@@ -1,3 +1,4 @@
+// components/filter-buttons/index.js
 export class FilterButtonsComponent {
     constructor(parent) {
         this.parent = parent;
@@ -7,9 +8,9 @@ export class FilterButtonsComponent {
         // Маппинг категорий на английский
         const categoryMapping = {
             "Все": "Все",
-            "Пейзажи": "landscapes",
-            "Портреты": "portraits",
-            "Стиль": "fashion"
+            "Браузер": "browser",
+            "Облако": "cloud",
+            "Заметки": "note"
         };
 
         return filters.map(filter => `
@@ -23,7 +24,7 @@ export class FilterButtonsComponent {
     }
 
     render(filters, listener) {
-        const html = this.getHTML(filters, "all"); // Начальная активная категория на английском
+        const html = this.getHTML(filters, "Все"); // Начальная активная категория на английском
         this.parent.innerHTML = html;
 
         this.parent.querySelectorAll('.filter-button').forEach(button => {

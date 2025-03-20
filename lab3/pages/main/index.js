@@ -10,24 +10,24 @@ export class MainPage {
         return [
             {
                 id: 1,
-                src: "https://avatars.mds.yandex.net/i?id=2fc759ef1c5de69310332c368b54341e_l-8343733-images-thumbs&n=13",
-                title: "Пейзаж",
-                category: "landscapes",
-                description: "Sunset over the mountains"
+                src: "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/gldn-MSFT-CP-Edge?wid=297&hei=167&fit=crop",
+                title: "Microsoft Edge",
+                category: "Браузер",
+                description: "Потрясающая производительность, больше конфиденциальности, продуктивности и дополнительных возможностей."
             },
             {
                 id: 2,
-                src: "https://avatars.mds.yandex.net/i?id=b8a73099237229389c4028206ab52671_l-10919913-images-thumbs&n=13",
-                title: "Портрет",
-                category: "portraits",
-                description: "Smiling family"
+                src: "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/gldn-Soft-CP-OneDriveCampaignRefresh-2?wid=297&hei=167&fit=crop",
+                title: "Microsoft OneDrive",
+                category: "Облако",
+                description: "Сохраняйте свои файлы и фотографии на OneDrive — они будут доступны с любого устройства и где угодно."
             },
             {
                 id: 3,
-                src: "https://i.pinimg.com/originals/8a/55/d5/8a55d5454c375e5989a795b4443ba04c.jpg",
-                title: "Стильная",
-                category: "fashion",
-                description: "Urban street style"
+                src: "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-SMB-OneNote?wid=297&hei=167&fit=crop",
+                title: "OneNote",
+                category: "Заметки",
+                description: "Приведите свои заметки и дела в порядок."
             }
         ];
     }
@@ -38,7 +38,7 @@ export class MainPage {
 
     getHTML() {
         return `
-            <div id="main-page" class="container mt-5"></div>
+            <div id="main-page" class="main-page"></div>
         `;
     }
 
