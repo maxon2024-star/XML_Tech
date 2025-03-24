@@ -28,6 +28,13 @@ export class MainPage {
                 title: "OneNote",
                 category: "Заметки",
                 description: "Приведите свои заметки и дела в порядок."
+            },
+            {
+                id: 4,
+                src: "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-Bing?wid=297&hei=167&fit=crop",
+                title: "Bing",
+                category: "browser",
+                description: "Поиск видео, картинок, карт, новостей и многого другого."
             }
         ];
     }

@@ -31,6 +31,13 @@ export class PhotoPage {
                 title: "OneNote",
                 category: "note",
                 description: "Приведите свои заметки и дела в порядок."
+            },
+            {
+                id: 4,
+                src: "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-Bing?wid=297&hei=167&fit=crop",
+                title: "Bing",
+                category: "browser",
+                description: "Поиск видео, картинок, карт, новостей и многого другого."
             }
         ];
         return photos;
@@ -43,7 +50,7 @@ export class PhotoPage {
     getHTML() {
         return `
             <div id="photo-page" class="container mt-5">
-                <h2 class="text-center mb-4">Фотогалерея</h2>
+                <h2 class="text-center mb-4">Наши продукты</h2>
                 <div class="filter-buttons"></div>
                 <div class="gallery"></div>
                 <div class="back-button-container"></div>
