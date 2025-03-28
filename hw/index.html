@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Store</title>
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="src/styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Microsoft Store</h1>
+
+        <!-- Форма для поиска аккаунта -->
+        <div class="mb-3">
+            <label for="accountNumber" class="form-label">Введите номер аккаунта:</label>
+            <input type="text" class="form-control" id="accountNumber" placeholder="12345">
+        </div>
+        <button id="searchButton" class="btn btn-primary mb-3">Поиск аккаунта</button>
+        <div id="accountResult" class="mt-3"></div>
+
+        <!-- Форма для поиска пар чисел (например, сумма заказов) -->
+        <hr>
+        <h2>Поиск пар чисел (сумма заказов)</h2>
+        <div class="mb-3">
+            <label for="orderAmountsInput" class="form-label">Введите суммы заказов (через запятую):</label>
+            <input type="text" class="form-control" id="orderAmountsInput" placeholder="100, 200, 150, 50, 250, 100">
+        </div>
+        <div class="mb-3">
+            <label for="targetSum" class="form-label">Введите целевую сумму:</label>
+            <input type="text" class="form-control" id="targetSum" placeholder="250">
+        </div>
+        <button id="findCoupleButton" class="btn btn-primary mb-3">Найти пары заказов</button>
+        <div id="coupleResult" class="mt-3"></div>
+
+        <!-- Форма для группировки анаграмм (например, имена продуктов) -->
+        <hr>
+        <h2>Группировка анаграмм (имена продуктов)</h2>
+        <div class="mb-3">
+            <label for="productNamesInput" class="form-label">Введите имена продуктов (через запятую):</label>
+            <input type="text" class="form-control" id="productNamesInput" placeholder="windows, office, windows, visual studio, power bi">
+        </div>
+        <button id="anagramButton" class="btn btn-primary mb-3">Группировать анаграммы</button>
+        <div id="anagramResult" class="mt-3"></div>
+    </div>
+
+    <script src="node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="src/index.js"></script>
+</body>
+</html>
