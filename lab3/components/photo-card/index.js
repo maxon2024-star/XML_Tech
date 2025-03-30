@@ -3,28 +3,25 @@ export class PhotoCardComponent {
         this.parent = parent;
     }
 
-    getHTML(data) {
-        return `
-            <div class="photo-card">
-                <img src="${data.src}" class="card-img-top" alt="${data.title}">
+    render(photo, onClick) {
+        const cardHTML = `
+            <div class="card photo-card mb-4" style="width: 18rem;">
+                <img src="${photo.src}" class="card-img-top" alt="${photo.title}">
                 <div class="card-body">
-                    <h5 class="card-title">${data.title}</h5>
-                    <p class="card-text">${data.description}</p>
-                    <button class="btn btn-primary" id="click-card-${data.id}" data-id="${data.id}">Подробнее</button>
+                    <h5 class="card-title">${photo.title}</h5>
+                    <p class="card-text">${photo.description}</p>
+                    <p class="photo-card-price" data-original-price="${photo.price}">Цена: $${photo.price.toFixed(2)}</p>
+                    <button class="btn btn-primary">Подробнее</button>
                 </div>
             </div>
         `;
-    }
 
-    addListeners(data, listener) {
-        document
-            .getElementById(`click-card-${data.id}`)
-            .addEventListener("click", listener);
-    }
+        this.parent.insertAdjacentHTML('beforeend', cardHTML);
 
-    render(data, listener) {
-        const html = this.getHTML(data);
-        this.parent.insertAdjacentHTML('beforeend', html);
-        this.addListeners(data, listener);
+        const card = this.parent.lastElementChild;
+        const button = card.querySelector('.btn-primary');
+        button.addEventListener('click', () => {
+            onClick(photo.id);
+        });
     }
 }

@@ -10,7 +10,7 @@ export class FilterSliderComponent {
     getHTML() {
         return `
             <div class="filter-slider">
-                <label for="min-price-range">От: ${this.currentMinPrice}</label>
+                <label for="min-price-range">От: ${this.currentMinPrice}$</label>
                 <input 
                     type="range" 
                     id="min-price-range" 
@@ -18,7 +18,7 @@ export class FilterSliderComponent {
                     max="${this.maxPrice}" 
                     value="${this.currentMinPrice}" 
                 />
-                <label for="max-price-range">До: ${this.currentMaxPrice}</label>
+                <label for="max-price-range">До: ${this.currentMaxPrice}$</label>
                 <input 
                     type="range" 
                     id="max-price-range" 
@@ -45,7 +45,7 @@ export class FilterSliderComponent {
                 this.currentMinPrice = this.currentMaxPrice;
                 minRangeInput.value = this.currentMaxPrice;
             }
-            minLabel.textContent = `От: ${this.currentMinPrice}`;
+            minLabel.textContent = `От: ${this.currentMinPrice}$`;
             listener(this.currentMinPrice, this.currentMaxPrice);
         });
 
@@ -55,7 +55,7 @@ export class FilterSliderComponent {
                 this.currentMaxPrice = this.currentMinPrice;
                 maxRangeInput.value = this.currentMinPrice;
             }
-            maxLabel.textContent = `До: ${this.currentMaxPrice}`;
+            maxLabel.textContent = `До: ${this.currentMaxPrice}$`;
             listener(this.currentMinPrice, this.currentMaxPrice);
         });
     }

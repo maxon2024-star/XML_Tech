@@ -15,14 +15,14 @@ export class PhotoPage {
                 id: 1,
                 src: "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/gldn-MSFT-CP-Edge?wid=297&hei=167&fit=crop",
                 title: "Microsoft Edge",
-                description: "Потрясающая производительность, больше конфиденциальности, продуктивности и дополнительных возможностей.",
+                description: "Потрясающая производительность и больше возможностей.",
                 price: 100
             },
             {
                 id: 2,
                 src: "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/gldn-Soft-CP-OneDriveCampaignRefresh-2?wid=297&hei=167&fit=crop",
                 title: "Microsoft OneDrive",
-                description: "Сохраняйте свои файлы и фотографии на OneDrive — они будут доступны с любого устройства и где угодно.",
+                description: "Сохраняйте свои файлы на OneDrive — доступность где угодно.",
                 price: 200
             },
             {
@@ -52,7 +52,8 @@ export class PhotoPage {
             <div id="photo-page" class="container mt-5">
                 <h2 class="text-center mb-4">Наши продукты</h2>
                 <div class="filter-slider"></div>
-                <div class="gallery"></div>
+                <div class="sum-of-squares mt-4"></div>
+                <div class="anagram-info mt-4"></div> <!-- Плашка для группировки анаграмм -->                <div class="gallery"></div>
                 <div class="back-button-container"></div>
             </div>
         `;
@@ -75,6 +76,12 @@ export class PhotoPage {
             this.onFilterChange(minPrice, maxPrice, data);
         });
 
+        // Добавляем плашку для отображения суммы квадратов цен
+        this.showSumOfSquares(prices);
+
+        // Добавляем плашку для отображения группировки анаграмм
+        this.showAnagramGroups(data);
+
         this.showFilteredPhotos(data, minPrice, maxPrice); // Показываем все товары по умолчанию
         
         // Добавляем кнопку "Назад"
@@ -90,13 +97,19 @@ export class PhotoPage {
     showFilteredPhotos(photos, minPrice, maxPrice) {
         const gallery = this.pageRoot.querySelector('.gallery');
         gallery.innerHTML = ''; // Очистка галереи
-        
+
+        const filteredPrices = [];
+
         photos.forEach(photo => {
             if (photo.price >= minPrice && photo.price <= maxPrice) {
                 const card = new PhotoCardComponent(gallery);
                 card.render(photo, this.onClickCard.bind(this));
+                filteredPrices.push(photo.price);
             }
         });
+
+        // Обновляем сумму квадратов цен для отфильтрованных продуктов
+        this.showSumOfSquares(filteredPrices);
     }
 
     goBack() {
@@ -107,5 +120,52 @@ export class PhotoPage {
     onClickCard(id) {
         const photoPage = new PhotoPage(this.parent, id);
         photoPage.render();
+    }
+
+    sumOfSquares(arr) {
+        let sum = 0;
+        for (let i = 0; i < arr.length; i++) {
+            sum += arr[i] * arr[i];
+        }
+        return sum;
+    }
+
+    showSumOfSquares(prices) {
+        const sumOfSquaresContainer = this.pageRoot.querySelector('.sum-of-squares');
+        const sum = this.sumOfSquares(prices);
+        sumOfSquaresContainer.innerHTML = `<div class="sum-of-squares">Завтра цена на все продукты вырастет на: ${sum}$</div>`;
+    }
+
+    anagram(words) {
+        const anagrams = {};
+
+        for (let word of words) {
+            const sortedWord = word.toLowerCase().split('').sort().join('');
+            if (!anagrams[sortedWord]) {
+                anagrams[sortedWord] = [];
+            }
+            anagrams[sortedWord].push(word);
+        }
+
+        return Object.values(anagrams)
+            .filter(group => group.length >= 2)
+            .map(group => group.sort().join(', '))
+            .sort();
+    }
+
+    showAnagramGroups(data) {
+        const titles = data.map(photo => photo.title);
+        const anagramGroups = this.anagram(titles);
+
+        const anagramGroupContainer = this.pageRoot.querySelector('.anagram-info');
+        if (anagramGroups.length > 0) {
+            anagramGroupContainer.innerHTML = `
+                <p>Группы анаграмм среди продуктов: ${anagramGroups.join('; ')}</p>
+            `;
+        } else {
+            anagramGroupContainer.innerHTML = `
+                <p>Группы анаграмм среди продуктов не найдены.</p>
+            `;
+        }
     }
 }
