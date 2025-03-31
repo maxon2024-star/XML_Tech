@@ -1,16 +1,16 @@
 import { FilterSliderComponent } from "../../components/filter-slider/index.js";
 import { BackButtonComponent } from "../../components/back-button/index.js";
-import { PhotoCardComponent } from "../../components/photo-card/index.js";
+import { ProductCardComponent } from "../../components/product-card/index.js";
 import { MainPage } from "../main/index.js";
 
-export class PhotoPage {
-    constructor(parent, photoId) {
+export class ProductPage {
+    constructor(parent, productId) {
         this.parent = parent;
-        this.photoId = photoId;
+        this.productId = productId;
     }
 
-    getData() {
-        const photos = [
+    getProducts() {
+        const products = [
             {
                 id: 1,
                 src: "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/gldn-MSFT-CP-Edge?wid=297&hei=167&fit=crop",
@@ -40,16 +40,16 @@ export class PhotoPage {
                 price: 150
             }
         ];
-        return photos;
+        return products;
     }
 
     get pageRoot() {
-        return document.getElementById('photo-page');
+        return document.getElementById('product-page');
     }
 
     getHTML() {
         return `
-            <div id="photo-page" class="container mt-5">
+            <div id="product-page" class="container mt-5">
                 <h2 class="text-center mb-4">Наши продукты</h2>
                 <div class="filter-slider"></div>
                 <div class="sum-of-squares mt-4"></div>
@@ -63,10 +63,10 @@ export class PhotoPage {
         this.parent.innerHTML = ''; // Очистка текущего содержимого
         this.parent.insertAdjacentHTML('beforeend', this.getHTML());
 
-        const data = this.getData();
+        const data = this.getProducts();
 
         // Определяем минимальную и максимальную цену
-        const prices = data.map(photo => photo.price);
+        const prices = data.map(product => product.price);
         const minPrice = Math.min(...prices);
         const maxPrice = Math.max(...prices);
 
@@ -82,7 +82,7 @@ export class PhotoPage {
         // Добавляем плашку для отображения группировки анаграмм
         this.showAnagramGroups(data);
 
-        this.showFilteredPhotos(data, minPrice, maxPrice); // Показываем все товары по умолчанию
+        this.showFilteredproducts(data, minPrice, maxPrice); // Показываем все товары по умолчанию
         
         // Добавляем кнопку "Назад"
         const backButtonContainer = this.pageRoot.querySelector('.back-button-container');
@@ -91,20 +91,20 @@ export class PhotoPage {
     }
 
     onFilterChange(minPrice, maxPrice, data) {
-        this.showFilteredPhotos(data, minPrice, maxPrice);
+        this.showFilteredproducts(data, minPrice, maxPrice);
     }
 
-    showFilteredPhotos(photos, minPrice, maxPrice) {
+    showFilteredproducts(products, minPrice, maxPrice) {
         const gallery = this.pageRoot.querySelector('.gallery');
         gallery.innerHTML = ''; // Очистка галереи
 
         const filteredPrices = [];
 
-        photos.forEach(photo => {
-            if (photo.price >= minPrice && photo.price <= maxPrice) {
-                const card = new PhotoCardComponent(gallery);
-                card.render(photo, this.onClickCard.bind(this));
-                filteredPrices.push(photo.price);
+        products.forEach(product => {
+            if (product.price >= minPrice && product.price <= maxPrice) {
+                const card = new ProductCardComponent(gallery);
+                card.render(product, this.onClickCard.bind(this));
+                filteredPrices.push(product.price);
             }
         });
 
@@ -118,8 +118,8 @@ export class PhotoPage {
     }
 
     onClickCard(id) {
-        const photoPage = new PhotoPage(this.parent, id);
-        photoPage.render();
+        const ProductPage = new ProductPage(this.parent, id);
+        ProductPage.render();
     }
 
     sumOfSquares(arr) {
@@ -154,7 +154,7 @@ export class PhotoPage {
     }
 
     showAnagramGroups(data) {
-        const titles = data.map(photo => photo.title);
+        const titles = data.map(product => product.title);
         const anagramGroups = this.anagram(titles);
 
         const anagramGroupContainer = this.pageRoot.querySelector('.anagram-info');

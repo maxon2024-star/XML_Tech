@@ -1,13 +1,13 @@
-import { PhotoCardComponent } from "../../components/photo-card/index.js";
-import { PhotoPage } from "../photo-page/index.js";
+import { ProductCardComponent } from "../../components/product-card/index.js";
+import { ProductPage } from "../product-page/index.js";
 
 export class MainPage {
     constructor(parent) {
         this.parent = parent;
-        this.data = this.getData();
+        this.data = this.getProducts();
     }
 
-    getData() {
+    getProducts() {
         return [
             {
                 id: 1,
@@ -72,7 +72,7 @@ export class MainPage {
         const gallery = this.pageRoot.querySelector('.gallery');
 
         this.data.forEach(item => {
-            const card = new PhotoCardComponent(gallery);
+            const card = new ProductCardComponent(gallery);
             card.render(item, this.onClickCard.bind(this));
         });
 
@@ -97,7 +97,7 @@ export class MainPage {
             this.data.push(newCardData);
 
             const gallery = this.pageRoot.querySelector('.gallery');
-            const card = new PhotoCardComponent(gallery);
+            const card = new ProductCardComponent(gallery);
             card.render(newCardData, this.onClickCard.bind(this));
 
             // Проверяем наличие дубликатов после добавления новой карточки
@@ -122,8 +122,8 @@ export class MainPage {
     }
 
     onClickCard(id) {
-        const photoPage = new PhotoPage(this.parent, id);
-        photoPage.render();
+        const productPage = new ProductPage(this.parent, id);
+        productPage.render();
     }
 
     isEqualObj(obj1, obj2) {
