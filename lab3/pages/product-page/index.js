@@ -1,12 +1,12 @@
-import { FilterSliderComponent } from "../../components/filter-slider/index.js";
+// pages/product-page/index.js
 import { BackButtonComponent } from "../../components/back-button/index.js";
-import { ProductCardComponent } from "../../components/product-card/index.js";
 import { MainPage } from "../main/index.js";
 
 export class ProductPage {
     constructor(parent, productId) {
         this.parent = parent;
         this.productId = productId;
+        this.mainPage = new MainPage(this.parent);
     }
 
     getProducts() {
@@ -15,29 +15,57 @@ export class ProductPage {
                 id: 1,
                 src: "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/gldn-MSFT-CP-Edge?wid=297&hei=167&fit=crop",
                 title: "Microsoft Edge",
-                description: "Потрясающая производительность и больше возможностей.",
+                description: "Потрясающая производительность и больше возможностей. Microsoft Edge — это современный браузер, который обеспечивает быструю загрузку сайтов, интуитивно понятный интерфейс и множество полезных функций, таких как защита от вредоносного ПО, чтение PDF-файлов прямо в браузере и интеграция с другими продуктами Microsoft.",
                 price: 100
             },
             {
                 id: 2,
                 src: "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/gldn-Soft-CP-OneDriveCampaignRefresh-2?wid=297&hei=167&fit=crop",
                 title: "Microsoft OneDrive",
-                description: "Сохраняйте свои файлы на OneDrive — доступность где угодно.",
+                description: "Сохраняйте свои файлы на OneDrive — доступность где угодно. OneDrive — облачное хранилище от Microsoft, которое позволяет вам хранить и синхронизировать ваши файлы, документы, фотографии и видео. Доступ к вашим файлам возможен с любых устройств и платформ, обеспечивая максимальную удобство и безопасность ваших данных.",
                 price: 200
             },
             {
                 id: 3,
                 src: "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-SMB-OneNote?wid=297&hei=167&fit=crop",
                 title: "OneNote",
-                description: "Приведите свои заметки и дела в порядок.",
+                description: "Приведите свои заметки и дела в порядок. OneNote — мощное средство для организации информации. Вы можете создавать заметки, списки дел, диаграммы и многое другое. OneNote идеально подходит для студентов, работников и любых людей, которым нужно эффективно управлять своими данными и идеями.",
                 price: 170
             },
             {
                 id: 4,
                 src: "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-Bing?wid=297&hei=167&fit=crop",
                 title: "Bing",
-                description: "Поиск видео, картинок, карт, новостей и многого другого.",
+                description: "Поиск видео, картинок, карт, новостей и многого другого. Bing — поисковая система от Microsoft, которая предлагает широкий спектр услуг, включая поиск в Интернете, поиск изображений, карты, новости и многое другое. Bing известен своей точностью и удобством использования.",
                 price: 150
+            },
+            {
+                id: 5,
+                src: "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-Bing?wid=297&hei=167&fit=crop",
+                title: "eat",
+                description: "Продукт eat — это демонстрационный товар для тестирования функциональности анаграмм. Этот продукт может быть использован для проверки алгоритмов группировки анаграмм и отображения соответствующих меток на карточках продуктов.",
+                price: 69
+            },
+            {
+                id: 6,
+                src: "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-Bing?wid=297&hei=167&fit=crop",
+                title: "tea",
+                description: "Продукт tea — это демонстрационный товар для тестирования функциональности анаграмм. Этот продукт может быть использован для проверки алгоритмов группировки анаграмм и отображения соответствующих меток на карточках продуктов.",
+                price: 96
+            },
+            {
+                id: 7,
+                src: "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-Bing?wid=297&hei=167&fit=crop",
+                title: "ace",
+                description: "Продукт ace — это демонстрационный товар для тестирования функциональности анаграмм. Этот продукт может быть использован для проверки алгоритмов группировки анаграмм и отображения соответствующих меток на карточках продуктов.",
+                price: 69
+            },
+            {
+                id: 8,
+                src: "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-Bing?wid=297&hei=167&fit=crop",
+                title: "eac",
+                description: "Продукт eac — это демонстрационный товар для тестирования функциональности анаграмм. Этот продукт может быть использован для проверки алгоритмов группировки анаграмм и отображения соответствующих меток на карточках продуктов.",
+                price: 96
             }
         ];
         return products;
@@ -50,10 +78,8 @@ export class ProductPage {
     getHTML() {
         return `
             <div id="product-page" class="container mt-5">
-                <h2 class="text-center mb-4">Наши продукты</h2>
-                <div class="filter-slider"></div>
-                <div class="sum-of-squares mt-4"></div>
-                <div class="anagram-info mt-4"></div> <!-- Плашка для группировки анаграмм -->                <div class="gallery"></div>
+                <h2 class="text-center mb-4">Продукт</h2>
+                <div class="product-details"></div>
                 <div class="back-button-container"></div>
             </div>
         `;
@@ -63,109 +89,28 @@ export class ProductPage {
         this.parent.innerHTML = ''; // Очистка текущего содержимого
         this.parent.insertAdjacentHTML('beforeend', this.getHTML());
 
-        const data = this.getProducts();
+        const product = this.getProducts().find(item => item.id === this.productId);
+        if (product) {
+            const productDetailsContainer = this.pageRoot.querySelector('.product-details');
+            const isAnagram = this.mainPage.isAnagram(product.title);
+            productDetailsContainer.innerHTML = `
+                <img src="${product.src}" alt="${product.title}" style="max-width: 100%; height: auto;">
+                <h3>${product.title}</h3>
+                <p>${product.description}</p>
+                <p>Цена: ${product.price}$</p>
+                <p>${isAnagram ? 'Анаграмма' : ''}</p>
+            `;
+        } else {
+            this.pageRoot.querySelector('.product-details').innerHTML = '<p>Продукт не найден.</p>';
+        }
 
-        // Определяем минимальную и максимальную цену
-        const prices = data.map(product => product.price);
-        const minPrice = Math.min(...prices);
-        const maxPrice = Math.max(...prices);
-
-        const filterContainer = this.pageRoot.querySelector('.filter-slider');
-        const filterSlider = new FilterSliderComponent(filterContainer, minPrice, maxPrice);
-        filterSlider.render((minPrice, maxPrice) => {
-            this.onFilterChange(minPrice, maxPrice, data);
-        });
-
-        // Добавляем плашку для отображения суммы квадратов цен
-        this.showSumOfSquares(prices);
-
-        // Добавляем плашку для отображения группировки анаграмм
-        this.showAnagramGroups(data);
-
-        this.showFilteredproducts(data, minPrice, maxPrice); // Показываем все товары по умолчанию
-        
-        // Добавляем кнопку "Назад"
         const backButtonContainer = this.pageRoot.querySelector('.back-button-container');
         const backButton = new BackButtonComponent(backButtonContainer);
         backButton.render(this.goBack.bind(this));
     }
 
-    onFilterChange(minPrice, maxPrice, data) {
-        this.showFilteredproducts(data, minPrice, maxPrice);
-    }
-
-    showFilteredproducts(products, minPrice, maxPrice) {
-        const gallery = this.pageRoot.querySelector('.gallery');
-        gallery.innerHTML = ''; // Очистка галереи
-
-        const filteredPrices = [];
-
-        products.forEach(product => {
-            if (product.price >= minPrice && product.price <= maxPrice) {
-                const card = new ProductCardComponent(gallery);
-                card.render(product, this.onClickCard.bind(this));
-                filteredPrices.push(product.price);
-            }
-        });
-
-        // Обновляем сумму квадратов цен для отфильтрованных продуктов
-        this.showSumOfSquares(filteredPrices);
-    }
-
     goBack() {
         const mainPage = new MainPage(this.parent);
         mainPage.render();
-    }
-
-    onClickCard(id) {
-        const ProductPage = new ProductPage(this.parent, id);
-        ProductPage.render();
-    }
-
-    sumOfSquares(arr) {
-        let sum = 0;
-        for (let i = 0; i < arr.length; i++) {
-            sum += arr[i] * arr[i];
-        }
-        return sum;
-    }
-
-    showSumOfSquares(prices) {
-        const sumOfSquaresContainer = this.pageRoot.querySelector('.sum-of-squares');
-        const sum = this.sumOfSquares(prices);
-        sumOfSquaresContainer.innerHTML = `<div class="sum-of-squares">Завтра цена на все продукты вырастет на: ${sum}$</div>`;
-    }
-
-    anagram(words) {
-        const anagrams = {};
-
-        for (let word of words) {
-            const sortedWord = word.toLowerCase().split('').sort().join('');
-            if (!anagrams[sortedWord]) {
-                anagrams[sortedWord] = [];
-            }
-            anagrams[sortedWord].push(word);
-        }
-
-        return Object.values(anagrams)
-            .filter(group => group.length >= 2)
-            .map(group => group.sort().join(', '))
-            .sort();
-    }
-
-    showAnagramGroups(data) {
-        const titles = data.map(product => product.title);
-        const anagramGroups = this.anagram(titles);
-
-        const anagramGroupContainer = this.pageRoot.querySelector('.anagram-info');
-        if (anagramGroups.length > 0) {
-            anagramGroupContainer.innerHTML = `
-                <p>Группы анаграмм среди продуктов: ${anagramGroups.join('; ')}</p>
-            `;
-        } else {
-            anagramGroupContainer.innerHTML = `
-                <p>Группы анаграмм среди продуктов не найдены.</p>
-            `;
-        }
     }
 }

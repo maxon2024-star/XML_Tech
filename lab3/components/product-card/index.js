@@ -1,27 +1,26 @@
+// components/product-card/index.js
 export class ProductCardComponent {
-    constructor(parent) {
+    constructor(parent, isAnagram) {
         this.parent = parent;
+        this.isAnagram = isAnagram;
     }
 
-    render(product, onClick) {
-        const cardHTML = `
-            <div class="card product-card mb-4" style="width: 18rem;">
-                <img src="${product.src}" class="card-img-top" alt="${product.title}">
-                <div class="card-body">
-                    <h5 class="card-title">${product.title}</h5>
-                    <p class="card-text">${product.description}</p>
-                    <p class="product-card-price" data-original-price="${product.price}">Цена: $${product.price.toFixed(2)}</p>
-                    <button class="btn btn-primary">Подробнее</button>
-                </div>
+    render(data, onClick) {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+            <img src="${data.src}" alt="${data.title}">
+            <div class="card-content">
+                <h3>${data.title}</h3>
+                <p>${data.description}</p>
+                <p>Цена: ${data.price}$</p>
+                <label>
+                    <input type="checkbox" class="anagram-checkbox" ${this.isAnagram(data.title) ? 'checked' : ''}> Анаграмма
+                </label>
+                <button class="btn-primary">Подробнее</button>
             </div>
         `;
-
-        this.parent.insertAdjacentHTML('beforeend', cardHTML);
-
-        const card = this.parent.lastElementChild;
-        const button = card.querySelector('.btn-primary');
-        button.addEventListener('click', () => {
-            onClick(product.id);
-        });
+        card.querySelector('.btn-primary').addEventListener('click', () => onClick(data.id));
+        this.parent.appendChild(card);
     }
 }

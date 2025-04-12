@@ -12,66 +12,35 @@ body {
     flex-wrap: wrap;
     gap: 16px;
     padding: 16px;
+    justify-content: center;
 }
 
 /* Фильтры */
-.filter-slider {
+.filter-container {
     display: flex;
     align-items: center;
+    justify-content: center;
     margin-bottom: 20px;
 }
 
-#price-range {
-    width: 60%;
+#search-input {
+    padding: 5px;
     margin-right: 10px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-.filter-slider label {
-    font-size: 16px;
-    color: #333;
-    font-weight: bold; /* Жирный шрифт */
+#anagram-checkbox {
+    margin-left: 10px;
 }
 
-/* Стили для двухточечного бегунка */
-.slider-track {
-    position: relative;
-    width: 80%;
-    height: 8px;
-    background: #d3d3d3;
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.slider-range {
-    position: absolute;
-    height: 100%;
-    background: #0078D4;
-    border-radius: 5px;
-}
-
-.slider-thumb {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: #0078D4;
-    border-radius: 50%;
-    cursor: pointer;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 2;
-}
-
-.slider-thumb:hover {
-    background: #0056b3; /* Темный синий фон при наведении */
-}
-
-/* Карточки фотографий */
+/* Карточки продуктов */
 .product-card {
     background: white;
     border: 1px solid #e1e1e1;
     border-radius: 4px;
     padding: 16px;
-    margin: 16px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     transition: transform 0.2s;
     width: 250px;
@@ -87,7 +56,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Обрезка изображений */
 .product-card img {
     width: 100%;
     height: 150px; /* Высота изображения */
@@ -96,7 +64,6 @@ body {
     border-top-right-radius: 4px;
 }
 
-/* Контейнер для текста и кнопки */
 .product-card .card-content {
     flex-grow: 1;
     display: flex;
@@ -105,7 +72,6 @@ body {
     padding-bottom: 20px; /* Добавляем отступ для кнопки */
 }
 
-/* Кнопка "Подробнее" */
 .product-card .btn-primary {
     background-color: #0078D4;
     color: white;
@@ -163,19 +129,15 @@ body {
 .duplicate-alert {
     margin-bottom: 20px;
     padding: 16px;
-    /*background-color: #ffffff; /* Синий фон в стиле Microsoft */
-    color: white; /* Белый текст */
+    background-color: #ffffff; /* Белый фон */
+    border: 1px solid #e1e1e1; /* Граница */
+    border-radius: 4px; /* Закругленные углы */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Тень */
+    width: 60%; /* Растягиваем блок на всю ширину контейнера */
+    text-align: center; /* Выравнивание текста по центру */
     font-family: 'Segoe UI', Arial, sans-serif; /* Шрифт Microsoft */
     font-weight: bold; /* Жирный шрифт */
     font-size: 18px; /* Увеличиваем размер шрифта */
-    width: 60%; /* Растягиваем блок на всю ширину контейнера */
-    text-align: center; /* Выравнивание текста по центру */
-    display: flex; /* Используем Flexbox для вертикального выравнивания */
-    align-items: center; /* Вертикальное выравнивание текста */
-    justify-content: center; /* Горизонтальное выравнивание текста */
-    border: none; /* Убираем границу */
-    border-radius: 0; /* Убираем закругленные углы */
-    box-shadow: none; /* Убираем тень */
 }
 
 .duplicate-alert p {
@@ -207,13 +169,14 @@ body {
 .couple-form .btn-primary {
     background-color: #0078D4; /* Синий фон Microsoft */
     color: white;
-    padding: 10px 20px; /* Увеличиваем размер кнопки */
+    padding: 0.5rem 1rem; /* Увеличиваем размер кнопки */
     border: none; /* Убираем границу */
     border-radius: 5px; /* Закругленные углы */
     cursor: pointer;
     transition: background-color 0.2s;
     font-size: 16px; /* Размер шрифта */
     font-weight: bold; /* Жирный шрифт */
+    margin-left: 1rem; /* Добавляем отступ слева */
 }
 
 .couple-form .btn-primary:hover {
@@ -228,7 +191,7 @@ body {
     border: 1px solid #e1e1e1; /* Граница */
     border-radius: 4px; /* Закругленные углы */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Тень */
-    width: 100%; /* Растягиваем блок на всю ширину контейнера */
+    width: 60%; /* Растягиваем блок на всю ширину контейнера */
     text-align: center; /* Выравнивание текста по центру */
     font-family: 'Segoe UI', Arial, sans-serif; /* Шрифт Microsoft */
     font-weight: bold; /* Жирный шрифт */
@@ -238,6 +201,7 @@ body {
 .couple-result p {
     margin: 0; /* Убираем отступы у параграфа */
 }
+
 /* Стили для плашки вывода суммы квадратов цен */
 .sum-of-squares {
     margin-bottom: 20px;
@@ -245,9 +209,9 @@ body {
     background-color: #0078D4; /* Синий фон в стиле Microsoft */
     color: white; /* Белый текст */
     font-family: 'Segoe UI', Arial, sans-serif; /* Шрифт Microsoft */
-    font-weight: bold; /* Жирный шрифт */
-    font-size: 36px; /* Увеличиваем размер шрифта */
-    width: 100%; /* Растягиваем блок на всю ширину контейнера */
+    font-weight: 300; /* Тонкий шрифт */
+    font-size: 16px; /* Увеличиваем размер шрифта */
+    width: 50%; /* Растягиваем блок на всю ширину контейнера */
     text-align: center; /* Выравнивание текста по центру */
     display: flex; /* Используем Flexbox для вертикального выравнивания */
     align-items: center; /* Вертикальное выравнивание текста */
@@ -270,7 +234,7 @@ body {
     font-family: 'Segoe UI', Arial, sans-serif; /* Шрифт Microsoft */
     font-weight: bold; /* Жирный шрифт */
     font-size: 18px; /* Увеличиваем размер шрифта */
-    width: 100%; /* Растягиваем блок на всю ширину контейнера */
+    width: 50%; /* Растягиваем блок на всю ширину контейнера */
     text-align: center; /* Выравнивание текста по центру */
     display: flex; /* Используем Flexbox для вертикального выравнивания */
     align-items: center; /* Вертикальное выравнивание текста */
@@ -282,4 +246,69 @@ body {
 
 .anagram-info p {
     margin: 0; /* Убираем отступы у параграфа */
+}
+
+/* Стили для страницы продукта */
+.product-page {
+    padding: 20px;
+}
+
+.product-page h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.product-page .product-details {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.product-page .product-details img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.product-page .product-details p {
+    margin: 10px 0;
+}
+
+.back-button-container {
+    text-align: center;
+}
+
+.back-button-container button {
+    background-color: #0078D4;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-weight: bold;
+}
+
+.back-button-container button:hover {
+    background-color: #0056b3;
+}
+
+/* Галочка для анаграммы */
+.product-card .anagram-checkbox {
+    margin-bottom: 10px;
+    display: block; /* Размещаем галочку в отдельной строке */
+}
+
+/* Стили для слайдеров цен */
+#min-price-slider, #max-price-slider {
+    width: 80%;
+    margin: 10px auto;
+}
+
+/* Стили для меток слайдеров */
+#min-price-slider + label, #max-price-slider + label {
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
 }
