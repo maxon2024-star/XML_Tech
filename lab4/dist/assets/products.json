@@ -9,7 +9,7 @@
   {
     "id": 2,
     "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/gldn-Soft-CP-OneDriveCampaignRefresh-2?wid=297&hei=167&fit=crop",
-    "title": "Новове название карточки",
+    "title": "OneDrive",
     "description": "Подробная информация по кнопке",
     "price": 200
   },
@@ -47,19 +47,5 @@
     "title": "ace",
     "description": "Подробная информация по кнопке",
     "price": 69
-  },
-  {
-    "id": 8,
-    "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-Bing?wid=297&hei=167&fit=crop",
-    "title": "eac",
-    "description": "Подробная информация по кнопке",
-    "price": 96
-  },
-  {
-    "src": "https://i.pinimg.com/736x/1e/a2/e1/1ea2e153f5b11a39aa4a42a409ac477d.jpg",
-    "title": "lambo",
-    "description": "Mr. Beast colab plz",
-    "price": 1500,
-    "id": 9
   }
 ]
