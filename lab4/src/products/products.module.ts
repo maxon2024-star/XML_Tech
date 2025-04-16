@@ -3,7 +3,6 @@ import { Module } from '@nestjs/common';
 import { ProductsController } from './products.controller';
 import { ProductsService } from './products.service';
 import { FileService } from '../file.service';
-import { FileAccessor } from '../file.service'; // Импортируем FileAccessor
 import { Product } from './entities/product.entity'; // Импортируем Product
 
 @Module({
@@ -16,6 +15,4 @@ import { Product } from './entities/product.entity'; // Импортируем P
     },
   ],
 })
-export class ProductsModule implements FileAccessor {
-  public readonly filePath = 'assets/products.json';
-}
+export class ProductsModule {}

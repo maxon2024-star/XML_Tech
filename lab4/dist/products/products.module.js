@@ -12,9 +12,6 @@ const products_controller_1 = require("./products.controller");
 const products_service_1 = require("./products.service");
 const file_service_1 = require("../file.service");
 let ProductsModule = class ProductsModule {
-    constructor() {
-        this.filePath = 'assets/products.json';
-    }
 };
 exports.ProductsModule = ProductsModule;
 exports.ProductsModule = ProductsModule = __decorate([

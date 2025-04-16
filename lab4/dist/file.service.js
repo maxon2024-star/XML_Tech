@@ -24,14 +24,18 @@ let FileService = class FileService {
         try {
             const data = fs.readFileSync(this.filePath, 'utf8');
             if (!data.trim()) {
-                return {};
+                return [];
             }
-            return JSON.parse(data);
+            const parsedData = JSON.parse(data);
+            if (!Array.isArray(parsedData)) {
+                throw new Error('File does not contain a valid array');
+            }
+            return parsedData;
         }
         catch (error) {
             if (error.code === 'ENOENT') {
                 console.error(`File not found: ${this.filePath}`);
-                return {};
+                return [];
             }
             throw error;
         }

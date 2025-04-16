@@ -19,13 +19,17 @@ export class FileService<I> {
     try {
       const data = fs.readFileSync(this.filePath, 'utf8');
       if (!data.trim()) {
-        return {} as T; // Возвращаем пустой объект или массив, если файл пустой
+        return [] as T; // Возвращаем пустой массив, если файл пустой
       }
-      return JSON.parse(data) as T;
+      const parsedData = JSON.parse(data);
+      if (!Array.isArray(parsedData)) {
+        throw new Error('File does not contain a valid array');
+      }
+      return parsedData as T;
     } catch (error) {
       if (error.code === 'ENOENT') {
         console.error(`File not found: ${this.filePath}`);
-        return {} as T; // Возвращаем пустой объект или массив, если файл не найден
+        return [] as T; // Возвращаем пустой массив, если файл не найден
       }
       throw error;
     }
