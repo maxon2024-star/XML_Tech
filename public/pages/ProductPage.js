@@ -12,8 +12,20 @@ export class ProductPage {
     }
 
     getData() {
-        ajax.get(productUrls.getProductById(this.id), (data) => {
-            this.renderData(data);
+        if (!this.id) {
+            console.error('Product ID is undefined');
+            this.parent.innerHTML = '<h1>Product not found</h1>';
+            return;
+        }
+        ajax.get(productUrls.getProductById(this.id), (data, status) => {
+            if (status === 404) {
+                this.parent.innerHTML = '<h1>Product not found</h1>';
+            } else if (status === 200) {
+                this.renderData(data);
+            } else {
+                console.error('Failed to fetch product:', status, data);
+                this.parent.innerHTML = '<h1>Error loading product</h1>';
+            }
         });
     }
 
@@ -23,6 +35,13 @@ export class ProductPage {
 
         const editForm = new ProductFormComponent(this.pageRoot);
         editForm.render(this.updateProduct.bind(this), item);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete Product';
+        deleteButton.addEventListener('click', () => {
+            this.deleteProduct();
+        });
+        this.pageRoot.appendChild(deleteButton);
     }
 
     clickBack() {
@@ -30,9 +49,29 @@ export class ProductPage {
     }
 
     updateProduct(updatedProduct) {
+        if (!this.id) {
+            console.error('Product ID is undefined');
+            return;
+        }
         ajax.patch(productUrls.updateProductById(this.id), updatedProduct, (data, status) => {
             if (status === 200) {
                 this.getData();
+            } else {
+                console.error('Failed to update product:', status, data);
+            }
+        });
+    }
+
+    deleteProduct() {
+        if (!this.id) {
+            console.error('Product ID is undefined');
+            return;
+        }
+        ajax.delete(productUrls.removeProductById(this.id), (data, status) => {
+            if (status === 200) {
+                window.location.hash = '#';
+            } else {
+                console.error('Failed to delete product:', status, data);
             }
         });
     }

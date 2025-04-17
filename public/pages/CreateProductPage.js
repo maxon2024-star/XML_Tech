@@ -15,7 +15,7 @@ export class CreateProductPage {
             ajax.post(productUrls.createProduct(), data, (response, status) => {
                 if (status === 201) {
                     alert('Product created successfully!');
-                    window.location.hash = '#';
+                    window.location.hash = '';
                 } else {
                     alert('Failed to create product.');
                 }
@@ -24,7 +24,7 @@ export class CreateProductPage {
 
         const backButton = new BackButtonComponent(this.parent);
         backButton.render(() => {
-            window.location.hash = '#';
+            window.location.hash = '';
         });
     }
 }

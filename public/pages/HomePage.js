@@ -27,8 +27,8 @@ export class HomePage {
     }
 
     renderForm() {
-        const form = new ProductFormComponent(this.pageRoot);
-        form.render(this.addProduct.bind(this));
+        // Здесь мы не будем рисовать форму непосредственно на главной странице,
+        // а вместо этого будем переходить на отдельную страницу создания продукта.
     }
 
     addProduct(product) {
@@ -52,7 +52,8 @@ export class HomePage {
 
         const addButton = document.getElementById('addProductBtn');
         addButton.addEventListener('click', () => {
-            this.renderForm();
+            // При нажатии на кнопку "Add Product", переходим на страницу создания продукта
+            window.location.hash = '#create';
         });
     }
 }
