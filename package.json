@@ -4,9 +4,11 @@
     "description": "A simple Microsoft-like web app interacting with an API",
     "main": "main.js",
     "scripts": {
-      "start": "json-server --watch assets/products.json --port 3000"
+        "start": "json-server --watch assets/products.json --port 3000"
     },
     "dependencies": {
-      "json-server": "^0.17.0"
+        "cors": "^2.8.5",
+        "express": "^5.1.0",
+        "json-server": "^0.17.0"
     }
-  }
+}
