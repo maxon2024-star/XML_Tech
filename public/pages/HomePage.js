@@ -1,5 +1,4 @@
 import { ProductCardComponent } from '../components/ProductCardComponent.js';
-import { ProductFormComponent } from '../components/ProductFormComponent.js';
 import { ajax } from '../modules/ajax.js';
 import { productUrls } from '../modules/productUrls.js';
 
@@ -23,12 +22,16 @@ export class HomePage {
     }
 
     clickCard(id) {
-        window.location.hash = `#product/${id}`;
+        console.log('Clicked Product ID:', id); // Добавлено для отладки
+        if (id) {
+            window.location.hash = `#product/${id}`;
+        } else {
+            console.error('Product ID is undefined');
+        }
     }
 
     renderForm() {
-        // Здесь мы не будем рисовать форму непосредственно на главной странице,
-        // а вместо этого будем переходить на отдельную страницу создания продукта.
+        window.location.hash = '#create';
     }
 
     addProduct(product) {
@@ -52,8 +55,7 @@ export class HomePage {
 
         const addButton = document.getElementById('addProductBtn');
         addButton.addEventListener('click', () => {
-            // При нажатии на кнопку "Add Product", переходим на страницу создания продукта
-            window.location.hash = '#create';
+            this.renderForm();
         });
     }
 }

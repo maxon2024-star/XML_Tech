@@ -19,9 +19,13 @@ export class ProductCardComponent {
 
         if (clickCallback) {
             const card = this.parent.querySelector(`.product-card[data-id="${product.id}"]`);
-            card.addEventListener('click', () => {
-                clickCallback(product.id);
-            });
+            if (card) {
+                card.addEventListener('click', () => {
+                    clickCallback(product.id);
+                });
+            } else {
+                console.error('Product card element not found');
+            }
         }
     }
 }

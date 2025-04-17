@@ -9,6 +9,7 @@ export class ProductPage {
         this.parent = parent;
         this.pageRoot = document.createElement('div');
         this.id = id;
+        console.log('Constructor Product ID:', this.id); // Добавлено для отладки
     }
 
     getData() {

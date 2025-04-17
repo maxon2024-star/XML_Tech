@@ -3,7 +3,7 @@
     {
       "id": 1,
       "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/gldn-MSFT-CP-Edge?wid=297&hei=167&fit=crop",
-      "title": "Microsoft Edge",
+      "title": "Microsoft Edge 1",
       "description": "Подробная информация по кнопке",
       "price": 100
     },
@@ -55,13 +55,6 @@
       "title": "eac",
       "description": "Подробная информация по кнопке",
       "price": 96
-    },
-    {
-      "title": "1",
-      "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-Bing?wid=297&hei=167&fit=crop",
-      "description": "1",
-      "price": 1,
-      "id": 9
     }
   ]
 }
