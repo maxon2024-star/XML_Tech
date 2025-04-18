@@ -1,3 +1,4 @@
+// pages/HomePage.js
 import { ProductCardComponent } from '../components/ProductCardComponent.js';
 import { ajax } from '../modules/ajax.js';
 import { productUrls } from '../modules/productUrls.js';
@@ -17,7 +18,7 @@ export class HomePage {
     renderData(items) {
         items.forEach((item) => {
             const productCard = new ProductCardComponent(this.pageRoot);
-            productCard.render(item, this.clickCard.bind(this));
+            productCard.render(item, this.clickCard.bind(this), this.editProduct.bind(this), this.viewDetails.bind(this)); // Передаем колбэки для кнопок
         });
     }
 
@@ -25,6 +26,24 @@ export class HomePage {
         console.log('Clicked Product ID:', id); // Добавлено для отладки
         if (id) {
             window.location.hash = `#product/${id}`;
+        } else {
+            console.error('Product ID is undefined');
+        }
+    }
+
+    editProduct(id) {
+        console.log('Edit Product ID:', id); // Добавлено для отладки
+        if (id) {
+            window.location.hash = `#edit/${id}`;
+        } else {
+            console.error('Product ID is undefined');
+        }
+    }
+
+    viewDetails(id) {
+        console.log('View Details Product ID:', id); // Добавлено для отладки
+        if (id) {
+            window.location.hash = `#details/${id}`;
         } else {
             console.error('Product ID is undefined');
         }

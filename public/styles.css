@@ -1,15 +1,227 @@
+/* styles.css */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f2f1; /* Белый фон с легким оттенком серого */
+    color: #333; /* Темно-серый текст */
+}
+
+#app {
+    padding: 20px;
+}
+
 .product-card {
-    border: 1px solid #ccc;
-    padding: 10px;
+    background-color: #fff;
+    padding: 20px;
     margin: 10px;
     width: 200px;
     display: inline-block;
     text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.product-card:hover {
+    transform: scale(1.02);
 }
 
 .product-card img {
     max-width: 100%;
     height: auto;
-    border-radius: 5px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.product-card h2 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #0078d4; /* Голубой цвет заголовков */
+}
+
+.product-card p {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #5d5d5d; /* Светло-серый текст */
+}
+
+.product-card .edit-btn,
+.product-card .details-btn {
+    background-color: #0078d4;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin: 5px;
+    font-size: 14px;
+}
+
+.product-card .edit-btn:hover,
+.product-card .details-btn:hover {
+    background-color: #005a9e;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #0078d4; /* Голубой цвет заголовков */
+}
+
+button {
+    background-color: #0078d4;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #005a9e;
+}
+
+form {
+    margin-bottom: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+form input, form textarea {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+form button {
+    background-color: #0078d4;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 14px;
+}
+
+form button:hover {
+    background-color: #005a9e;
+}
+
+.back-button {
+    background-color: #0078d4;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.back-button:hover {
+    background-color: #005a9e;
+}
+
+/* Стили для страницы с подробной информацией о продукте */
+.product-details {
+    text-align: center;
+    margin: 20px auto;
+    max-width: 600px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.product-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #0078d4; /* Голубой цвет заголовков */
+}
+
+.product-description {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #5d5d5d; /* Светло-серый текст */
+}
+
+.product-price {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #0078d4; /* Голубой цвет цены */
+}
+
+/* Стили для страницы создания и редактирования продукта */
+.create-edit-form {
+    text-align: center;
+    margin: 20px auto;
+    max-width: 600px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.create-edit-form h1 {
+    margin-bottom: 20px;
+    color: #0078d4; /* Голубой цвет заголовков */
+}
+
+.create-edit-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-edit-form form input,
+.create-edit-form form textarea {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.create-edit-form form button {
+    background-color: #0078d4;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 14px;
+}
+
+.create-edit-form form button:hover {
+    background-color: #005a9e;
+}
+
+.create-edit-form .back-button {
+    margin-top: 20px;
 }

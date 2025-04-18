@@ -2,6 +2,7 @@
 import { HomePage } from './pages/HomePage.js';
 import { ProductPage } from './pages/ProductPage.js';
 import { CreateEditProductPage } from './pages/CreateEditProductPage.js';
+import { ProductDetailsPage } from './pages/ProductDetailsPage.js'; // Импортируем новую страницу
 
 document.addEventListener('DOMContentLoaded', () => {
     const app = document.getElementById('app');
@@ -13,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const homePage = new HomePage(app);
             homePage.render();
         } else if (hash.startsWith('#product/')) {
-            const productId = hash.split('#product/')[1]; // Изменено для корректного извлечения id
+            const productId = hash.split('#product/')[1];
             console.log('Clicked Product ID:', productId); // Добавлено для отладки
             if (productId) {
                 const productPage = new ProductPage(app, productId);
@@ -26,11 +27,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const createProductPage = new CreateEditProductPage(app);
             createProductPage.render();
         } else if (hash.startsWith('#edit/')) {
-            const productId = hash.split('#edit/')[1]; // Изменено для корректного извлечения id
+            const productId = hash.split('#edit/')[1];
             console.log('Edit Product ID:', productId); // Добавлено для отладки
             if (productId) {
                 const editProductPage = new CreateEditProductPage(app, productId);
                 editProductPage.render();
+            } else {
+                console.error('Product ID is undefined');
+                app.innerHTML = '<h1>Product not found</h1>';
+            }
+        } else if (hash.startsWith('#details/')) { // Добавляем новый маршрут для подробной информации
+            const productId = hash.split('#details/')[1];
+            console.log('Details Product ID:', productId); // Добавлено для отладки
+            if (productId) {
+                const productDetailsPage = new ProductDetailsPage(app, productId);
+                productDetailsPage.render();
             } else {
                 console.error('Product ID is undefined');
                 app.innerHTML = '<h1>Product not found</h1>';

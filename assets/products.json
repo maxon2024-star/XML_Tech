@@ -3,16 +3,16 @@
     {
       "id": 1,
       "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/gldn-MSFT-CP-Edge?wid=297&hei=167&fit=crop",
-      "title": "Microsoft Edge 1",
+      "title": "Microsoft Edge",
       "description": "Подробная информация по кнопке",
-      "price": 100
+      "price": 101
     },
     {
       "id": 2,
       "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/gldn-Soft-CP-OneDriveCampaignRefresh-2?wid=297&hei=167&fit=crop",
       "title": "OneDrive",
       "description": "Подробная информация по кнопке",
-      "price": 200
+      "price": 202
     },
     {
       "id": 3,

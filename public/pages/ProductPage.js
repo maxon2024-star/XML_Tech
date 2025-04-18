@@ -1,3 +1,4 @@
+// pages/ProductPage.js
 import { ProductCardComponent } from '../components/ProductCardComponent.js';
 import { BackButtonComponent } from '../components/BackButtonComponent.js';
 import { ProductFormComponent } from '../components/ProductFormComponent.js';
@@ -32,7 +33,7 @@ export class ProductPage {
 
     renderData(item) {
         const productCard = new ProductCardComponent(this.pageRoot);
-        productCard.render(item);
+        productCard.render(item, null, this.editProduct.bind(this), this.viewDetails.bind(this)); // Передаем колбэки для кнопок
 
         const editForm = new ProductFormComponent(this.pageRoot);
         editForm.render(this.updateProduct.bind(this), item);
@@ -47,6 +48,14 @@ export class ProductPage {
 
     clickBack() {
         window.location.hash = '#';
+    }
+
+    editProduct(id) {
+        window.location.hash = `#edit/${id}`;
+    }
+
+    viewDetails(id) {
+        window.location.hash = `#details/${id}`;
     }
 
     updateProduct(updatedProduct) {
