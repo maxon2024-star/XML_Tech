@@ -13,8 +13,10 @@ export class ProductCardComponent {
                 <img src="${src}" alt="${product.title}" style="width: 100%; height: auto;">
                 <h2>${product.title}</h2>
                 <p>Price: $${product.price}</p>
-                <button class="edit-btn">Редактировать</button>
-                <button class="details-btn">Подробнее</button>
+                <div class="product-card-buttons">
+                    <button class="edit-btn">Edit</button>
+                    <button class="details-btn">Details</button>
+                </div>
             </div>
         `;
         this.parent.insertAdjacentHTML('beforeend', html);
