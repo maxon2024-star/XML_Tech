@@ -1,4 +1,3 @@
-// components/ProductCardComponent.js
 export class ProductCardComponent {
     constructor(parent) {
         this.parent = parent;

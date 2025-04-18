@@ -1,4 +1,3 @@
-// pages/ProductPage.js
 import { ProductCardComponent } from '../components/ProductCardComponent.js';
 import { BackButtonComponent } from '../components/BackButtonComponent.js';
 import { ProductFormComponent } from '../components/ProductFormComponent.js';

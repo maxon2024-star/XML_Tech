@@ -1,4 +1,3 @@
-// pages/HomePage.js
 import { ProductCardComponent } from '../components/ProductCardComponent.js';
 import { ajax } from '../modules/ajax.js';
 import { productUrls } from '../modules/productUrls.js';

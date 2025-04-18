@@ -1,4 +1,3 @@
-// modules/productUrls.js
 class ProductUrls {
     constructor() {
         this.baseUrl = 'http://localhost:3000';

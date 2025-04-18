@@ -1,4 +1,3 @@
-// components/ProductFormComponent.js
 export class ProductFormComponent {
     constructor(parent) {
         this.parent = parent;

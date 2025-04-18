@@ -1,4 +1,3 @@
-// main.js
 import { HomePage } from './pages/HomePage.js';
 //import { ProductPage } from './pages/ProductPage.js';
 import { CreateEditProductPage } from './pages/CreateEditProductPage.js';
