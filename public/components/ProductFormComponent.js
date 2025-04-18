@@ -3,34 +3,41 @@ export class ProductFormComponent {
         this.parent = parent;
     }
 
-    render(submitCallback, product = null) {
-        // Заполняем форму данными продукта, если они есть
-        const titleValue = product ? product.title : '';
-        const srcValue = product ? product.src : '';
-        const descriptionValue = product ? product.description : '';
-        const priceValue = product ? product.price : '';
-
-        const html = `
-            <form id="productForm">
-                <input type="text" id="title" placeholder="Title" value="${titleValue}" required>
-                <input type="text" id="src" placeholder="Image URL" value="${srcValue}" required>
-                <textarea id="description" placeholder="Description" required>${descriptionValue}</textarea>
-                <input type="number" id="price" placeholder="Price" value="${priceValue}" required>
-                <button type="submit">${product ? 'Обновить' : 'Добавить'} продукт</button>
+    render(onSubmit, product = {}, onDelete = null) {
+        const isEdit = !!product.id;
+        this.parent.innerHTML = `
+            <form id="productForm" class="product-form">
+                <input type="text" name="title" placeholder="Название" value="${product.title || ''}" required />
+                <input type="text" name="src" placeholder="Ссылка на изображение" value="${product.src || ''}" required />
+                <textarea name="description" placeholder="Описание" required>${product.description || ''}</textarea>
+                <input type="number" name="price" placeholder="Цена" value="${product.price || ''}" required />
+                <div class="form-buttons">
+                    <button type="submit">Сохранить</button>
+                    ${isEdit ? '<button type="button" id="deleteButton" class="delete-button">Удалить</button>' : ''}
+                </div>
             </form>
         `;
-        this.parent.insertAdjacentHTML('beforeend', html);
 
         const form = this.parent.querySelector('#productForm');
-        form.addEventListener('submit', (event) => {
-            event.preventDefault();
-            const title = form.querySelector('#title').value;
-            const src = form.querySelector('#src').value;
-            const description = form.querySelector('#description').value;
-            const price = parseFloat(form.querySelector('#price').value);
-
-            const productData = { title, src, description, price };
-            submitCallback(productData);
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const productData = {
+                title: formData.get('title'),
+                src: formData.get('src'),
+                description: formData.get('description'),
+                price: parseFloat(formData.get('price')),
+            };
+            onSubmit(productData);
         });
+
+        if (isEdit && onDelete) {
+            const deleteButton = this.parent.querySelector('#deleteButton');
+            deleteButton.addEventListener('click', () => {
+                if (confirm('Вы уверены, что хотите удалить продукт?')) {
+                    onDelete(product.id);
+                }
+            });
+        }
     }
 }

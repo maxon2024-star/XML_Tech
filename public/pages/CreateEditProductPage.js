@@ -1,6 +1,6 @@
+// pages/CreateEditProductPage.js
 import { ProductFormComponent } from '../components/ProductFormComponent.js';
-import { BackButtonComponent } from '../components/BackButtonComponent.js';
-import { ajax } from '../modules/ajax.js';
+import { BackButtonComponent } from '../components/BackButtonComponent.js'; // Импортируем компонент кнопки назад
 import { productUrls } from '../modules/productUrls.js';
 
 export class CreateEditProductPage {
@@ -10,68 +10,99 @@ export class CreateEditProductPage {
         this.productId = productId;
     }
 
-    addProduct(product) {
-        ajax.post(productUrls.createProduct(), product, (data, status) => {
-            if (status === 201) {
-                window.location.hash = `#product/${data.id}`;
-            }
-        });
-    }
-
-    updateProduct(updatedProduct) {
-        ajax.patch(productUrls.updateProductById(this.productId), updatedProduct, (data, status) => {
-            if (status === 200) {
-                window.location.hash = `#product/${data.id}`;
-            }
-        });
-    }
-
-    deleteProduct() {
-        if (confirm('Are you sure you want to delete this product?')) {
-            ajax.delete(productUrls.deleteProductById(this.productId), (data, status) => {
-                if (status === 200 || status === 204) {
-                    window.location.hash = '#';
-                }
+    async addProduct(product) {
+        try {
+            const response = await fetch(productUrls.createProduct(), {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(product)
             });
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            window.location.hash = `#details/${data.id}`;
+        } catch (error) {
+            console.error('Failed to add product:', error);
+        }
+    }
+
+    async updateProduct(updatedProduct) {
+        try {
+            const response = await fetch(productUrls.updateProductById(this.productId), {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedProduct)
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            window.location.hash = `#details/${data.id}`;
+        } catch (error) {
+            console.error('Failed to update product:', error);
         }
     }
 
     clickBack() {
-        window.location.hash = '#';
+        window.location.hash = '#'; // Возвращаемся на главную страницу
     }
 
     render() {
         this.parent.innerHTML = '';
-        this.pageRoot.innerHTML = `
+        const html = `
             <div class="create-edit-form">
-                <h1>${this.productId ? 'Редактировать продукт' : 'Создать новый продукт'}</h1>
-                <div id="formContainer"></div>
-                <div class="button-group">
-                    <button id="backButton" class="back-button">Назад</button>
-                    ${this.productId ? '<button id="deleteButton" class="delete-button">Удалить</button>' : ''}
-                </div>
+                <h1>${this.productId ? 'Редактировать продукт' : 'Создать продукт'}</h1>
+                <button id="backButton" class="back-button">Back</button>
             </div>
         `;
-        this.parent.appendChild(this.pageRoot);
+        this.parent.insertAdjacentHTML('beforeend', html);
+        this.pageRoot = this.parent.querySelector('.create-edit-form');
 
-        const formComponent = new ProductFormComponent(this.pageRoot.querySelector('#formContainer'));
-
+        const form = new ProductFormComponent(this.pageRoot);
         if (this.productId) {
-            ajax.get(productUrls.getProductById(this.productId), (data) => {
-                formComponent.render(this.updateProduct.bind(this), data);
-            });
+            this.fetchProduct(this.productId, form);
         } else {
-            formComponent.render(this.addProduct.bind(this));
+            form.render(this.addProduct.bind(this));
         }
 
-        const backButton = this.pageRoot.querySelector('#backButton');
+        // Добавляем кнопку назад
+        const backButton = this.parent.querySelector('.back-button');
         if (backButton) {
             backButton.addEventListener('click', this.clickBack.bind(this));
         }
+    }
 
-        const deleteButton = this.pageRoot.querySelector('#deleteButton');
-        if (deleteButton) {
-            deleteButton.addEventListener('click', this.deleteProduct.bind(this));
+    async fetchProduct(id, form) {
+        try {
+            const response = await fetch(productUrls.getProductById(id));
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            form.render(this.updateProduct.bind(this), data, this.deleteProduct.bind(this));
+        } catch (error) {
+            console.error('Failed to fetch product:', error);
+            this.parent.innerHTML = '<h1>Product not found</h1>';
         }
     }
+
+    async deleteProduct(id) {
+        try {
+            const response = await fetch(productUrls.removeProductById(id), {
+                method: 'DELETE'
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            window.location.hash = '#';
+        } catch (error) {
+            console.error('Failed to delete product:', error);
+        }
+    }
+    
 }

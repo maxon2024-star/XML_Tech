@@ -1,5 +1,8 @@
+// pages/HomePage.js
 import { ProductCardComponent } from '../components/ProductCardComponent.js';
-import { ajax } from '../modules/ajax.js';
+import { BackButtonComponent } from '../components/BackButtonComponent.js'; // Импортируем компонент кнопки назад
+import { CreateEditProductPage } from '../pages/CreateEditProductPage.js'; // Импортируем страницу создания и редактирования
+import { ProductDetailsPage } from '../pages/ProductDetailsPage.js'; // Импортируем страницу подробной информации
 import { productUrls } from '../modules/productUrls.js';
 
 export class HomePage {
@@ -11,14 +14,22 @@ export class HomePage {
         this.maxPrice = 0;
     }
 
-    getData() {
-        ajax.get(productUrls.getProducts(), (data) => {
+    async getData() {
+        try {
+            const response = await fetch(productUrls.getProducts());
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
             this.allItems = data;
             this.minPrice = Math.min(...data.map(p => p.price));
             this.maxPrice = Math.max(...data.map(p => p.price));
             this.renderPriceFilter();
             this.renderData(data); // Изначально показываем все
-        });
+        } catch (error) {
+            console.error('Failed to fetch products:', error);
+            this.parent.innerHTML = '<h1>Error loading products</h1>';
+        }
     }
 
     renderPriceFilter() {
@@ -82,32 +93,82 @@ export class HomePage {
         const container = this.pageRoot.querySelector('.product-list-container');
         items.forEach((item) => {
             const productCard = new ProductCardComponent(container);
-            productCard.render(item, this.clickCard.bind(this), this.editProduct.bind(this), this.viewDetails.bind(this));
+            productCard.render(item, this.editProduct.bind(this), this.viewDetails.bind(this));
         });
     }
 
-    clickCard(id) {
-        if (id) window.location.hash = `#product/${id}`;
-    }
-
     editProduct(id) {
-        if (id) window.location.hash = `#edit/${id}`;
+        console.log('Edit Product ID:', id); // Добавлено для отладки
+        if (id) {
+            window.location.hash = `#edit/${id}`;
+        } else {
+            console.error('Product ID is undefined');
+        }
     }
 
     viewDetails(id) {
-        if (id) window.location.hash = `#details/${id}`;
+        console.log('View Details Product ID:', id); // Добавлено для отладки
+        if (id) {
+            window.location.hash = `#details/${id}`;
+        } else {
+            console.error('Product ID is undefined');
+        }
     }
 
     renderForm() {
         window.location.hash = '#create';
     }
 
-    addProduct(product) {
-        ajax.post(productUrls.createProduct(), product, (data, status) => {
-            if (status === 201) {
-                this.getData();
+    async addProduct(product) {
+        try {
+            const response = await fetch(productUrls.createProduct(), {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(product)
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
             }
-        });
+            const data = await response.json();
+            window.location.hash = `#product/${data.id}`;
+        } catch (error) {
+            console.error('Failed to add product:', error);
+        }
+    }
+
+    async updateProduct(updatedProduct) {
+        try {
+            const response = await fetch(productUrls.updateProductById(this.productId), {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedProduct)
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            window.location.hash = `#product/${data.id}`;
+        } catch (error) {
+            console.error('Failed to update product:', error);
+        }
+    }
+
+    async deleteProduct(id) {
+        try {
+            const response = await fetch(productUrls.removeProductById(id), {
+                method: 'DELETE'
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            window.location.hash = '#';
+        } catch (error) {
+            console.error('Failed to delete product:', error);
+        }
     }
 
     render() {
