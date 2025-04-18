@@ -1,6 +1,6 @@
 // main.js
 import { HomePage } from './pages/HomePage.js';
-import { ProductPage } from './pages/ProductPage.js';
+//import { ProductPage } from './pages/ProductPage.js';
 import { CreateEditProductPage } from './pages/CreateEditProductPage.js';
 import { ProductDetailsPage } from './pages/ProductDetailsPage.js'; // Импортируем новую страницу
 
@@ -16,13 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (hash.startsWith('#product/')) {
             const productId = hash.split('#product/')[1];
             console.log('Clicked Product ID:', productId); // Добавлено для отладки
-            if (productId) {
-                const productPage = new ProductPage(app, productId);
-                productPage.render();
-            } else {
-                console.error('Product ID is undefined');
-                app.innerHTML = '<h1>Product not found</h1>';
-            }
         } else if (hash === '#create') {
             const createProductPage = new CreateEditProductPage(app);
             createProductPage.render();

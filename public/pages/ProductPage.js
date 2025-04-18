@@ -39,7 +39,7 @@ export class ProductPage {
         editForm.render(this.updateProduct.bind(this), item);
 
         const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete Product';
+        deleteButton.textContent = 'Удалить';
         deleteButton.addEventListener('click', () => {
             this.deleteProduct();
         });
@@ -88,7 +88,7 @@ export class ProductPage {
 
     render() {
         this.parent.innerHTML = '';
-        const html = `<h1>Product Details</h1>`;
+        const html = `<h1>Подробнее о продукте</h1>`;
         this.parent.insertAdjacentHTML('beforeend', html);
         this.pageRoot = this.parent;
         this.getData();

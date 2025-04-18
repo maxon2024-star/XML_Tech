@@ -44,11 +44,11 @@ export class CreateEditProductPage {
         this.parent.innerHTML = '';
         this.pageRoot.innerHTML = `
             <div class="create-edit-form">
-                <h1>${this.productId ? 'Edit Product' : 'Create New Product'}</h1>
+                <h1>${this.productId ? 'Редактировать продукт' : 'Создать новый продукт'}</h1>
                 <div id="formContainer"></div>
                 <div class="button-group">
-                    <button id="backButton" class="back-button">Back</button>
-                    ${this.productId ? '<button id="deleteButton" class="delete-button">Delete</button>' : ''}
+                    <button id="backButton" class="back-button">Назад</button>
+                    ${this.productId ? '<button id="deleteButton" class="delete-button">Удалить</button>' : ''}
                 </div>
             </div>
         `;

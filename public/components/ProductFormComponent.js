@@ -17,7 +17,7 @@ export class ProductFormComponent {
                 <input type="text" id="src" placeholder="Image URL" value="${srcValue}" required>
                 <textarea id="description" placeholder="Description" required>${descriptionValue}</textarea>
                 <input type="number" id="price" placeholder="Price" value="${priceValue}" required>
-                <button type="submit">${product ? 'Update' : 'Add'} Product</button>
+                <button type="submit">${product ? 'Обновить' : 'Добавить'} продукт</button>
             </form>
         `;
         this.parent.insertAdjacentHTML('beforeend', html);

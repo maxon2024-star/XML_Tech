@@ -12,25 +12,14 @@ export class ProductCardComponent {
             <div class="product-card" data-id="${product.id}">
                 <img src="${src}" alt="${product.title}" style="width: 100%; height: auto;">
                 <h2>${product.title}</h2>
-                <p>Price: $${product.price}</p>
+                <p>Цена: $${product.price}</p>
                 <div class="product-card-buttons">
-                    <button class="edit-btn">Edit</button>
-                    <button class="details-btn">Details</button>
+                    <button class="edit-btn">Редактировать</button>
+                    <button class="details-btn">Подробнее</button>
                 </div>
             </div>
         `;
         this.parent.insertAdjacentHTML('beforeend', html);
-
-        if (clickCallback) {
-            const card = this.parent.querySelector(`.product-card[data-id="${product.id}"]`);
-            if (card) {
-                card.addEventListener('click', () => {
-                    clickCallback(product.id);
-                });
-            } else {
-                console.error('Product card element not found');
-            }
-        }
 
         const editButton = this.parent.querySelector(`.product-card[data-id="${product.id}"] .edit-btn`);
         if (editButton) {

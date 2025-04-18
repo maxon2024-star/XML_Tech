@@ -1,3 +1,4 @@
+// pages/HomePage.js
 import { ProductCardComponent } from '../components/ProductCardComponent.js';
 import { ajax } from '../modules/ajax.js';
 import { productUrls } from '../modules/productUrls.js';
@@ -23,14 +24,14 @@ export class HomePage {
 
     renderPriceFilter() {
         const filterHtml = `
-            <div id="priceFilter" style="text-align: center; margin: 20px;">
-                <label><strong>Price Range:</strong></label><br>
+            <div id="priceFilter" class="price-filter">
+                <label><strong>Диапазон цен:</strong></label><br>
                 <div style="display: flex; justify-content: center; gap: 10px; align-items: center; flex-wrap: wrap;">
-                    <input type="number" id="minPriceInput" min="${this.minPrice}" max="${this.maxPrice}" value="${this.minPrice}" style="width: 80px;">
-                    <input type="range" id="minPrice" min="${this.minPrice}" max="${this.maxPrice}" value="${this.minPrice}" step="1" style="width: 150px;">
-                    <span>to</span>
-                    <input type="range" id="maxPrice" min="${this.minPrice}" max="${this.maxPrice}" value="${this.maxPrice}" step="1" style="width: 150px;">
-                    <input type="number" id="maxPriceInput" min="${this.minPrice}" max="${this.maxPrice}" value="${this.maxPrice}" style="width: 80px;">
+                    <input type="number" id="minPriceInput" min="${this.minPrice}" max="${this.maxPrice}" value="${this.minPrice}" class="price-input">
+                    <input type="range" id="minPrice" min="${this.minPrice}" max="${this.maxPrice}" value="${this.minPrice}" step="1" class="slider">
+                    <span>до</span>
+                    <input type="range" id="maxPrice" min="${this.minPrice}" max="${this.maxPrice}" value="${this.maxPrice}" step="1" class="slider">
+                    <input type="number" id="maxPriceInput" min="${this.minPrice}" max="${this.maxPrice}" value="${this.maxPrice}" class="price-input">
                 </div>
             </div>
         `;
@@ -73,8 +74,15 @@ export class HomePage {
     
     renderData(items) {
         this.pageRoot.innerHTML = ''; // Очищаем перед новым рендером
+        const containerHtml = `
+            <div class="product-list-container">
+                <!-- Карточки продуктов будут вставляться сюда -->
+            </div>
+        `;
+        this.pageRoot.insertAdjacentHTML('beforeend', containerHtml);
+        const container = this.pageRoot.querySelector('.product-list-container');
         items.forEach((item) => {
-            const productCard = new ProductCardComponent(this.pageRoot);
+            const productCard = new ProductCardComponent(container);
             productCard.render(item, this.clickCard.bind(this), this.editProduct.bind(this), this.viewDetails.bind(this));
         });
     }
@@ -106,8 +114,8 @@ export class HomePage {
     render() {
         this.parent.innerHTML = '';
         const html = `
-            <h1>Products</h1>
-            <button id="addProductBtn">Add Product</button>
+            <h1>Продукты</h1>
+            <button id="addProductBtn">Добавить продукт</button>
             <div id="productList"></div>
         `;
         this.parent.insertAdjacentHTML('beforeend', html);

@@ -33,8 +33,8 @@ export class ProductDetailsPage {
                 <img src="${item.src}" alt="${item.title}" class="product-image">
                 <h2 class="product-title">${item.title}</h2>
                 <p class="product-description">${item.description}</p>
-                <p class="product-price">Price: $${item.price}</p>
-                <button id="backButton" class="back-button">Back</button>
+                <p class="product-price">Цена: $${item.price}</p>
+                <button id="backButton" class="back-button">Назад</button>
             </div>
         `;
         this.parent.insertAdjacentHTML('beforeend', html);
@@ -51,7 +51,7 @@ export class ProductDetailsPage {
 
     render() {
         this.parent.innerHTML = '';
-        const html = `<h1>Product Details</h1>`;
+        const html = `<h1>Информация о продукте</h1>`;
         this.parent.insertAdjacentHTML('beforeend', html);
         this.pageRoot = this.parent;
         this.getData();
