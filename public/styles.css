@@ -225,3 +225,25 @@ form button:hover {
 .create-edit-form .back-button {
     margin-top: 20px;
 }
+
+/* Стили для фильтрации по цене */
+.price-filter {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.price-filter label {
+    margin-right: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.price-filter .slider {
+    width: 300px;
+    margin-right: 10px;
+}
+
+.price-filter span {
+    font-size: 16px;
+    color: #5d5d5d;
+}

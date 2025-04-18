@@ -55,6 +55,13 @@
       "title": "eac",
       "description": "Подробная информация по кнопке",
       "price": 96
+    },
+    {
+      "src": "https://i.pinimg.com/736x/1e/a2/e1/1ea2e153f5b11a39aa4a42a409ac477d.jpg",
+      "title": "lambo",
+      "description": "Mr. Beast colab plz",
+      "price": 1500,
+      "id": 9
     }
   ]
 }
