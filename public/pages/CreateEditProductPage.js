@@ -53,29 +53,28 @@ export class CreateEditProductPage {
     }
 
     render() {
-        this.parent.innerHTML = '';
-        const html = `
-            <div class="create-edit-form">
-                <h1>${this.productId ? 'Редактировать продукт' : 'Создать продукт'}</h1>
-                <button id="backButton" class="back-button">Back</button>
-            </div>
-        `;
-        this.parent.insertAdjacentHTML('beforeend', html);
-        this.pageRoot = this.parent.querySelector('.create-edit-form');
+    this.parent.innerHTML = '';
 
-        const form = new ProductFormComponent(this.pageRoot);
-        if (this.productId) {
-            this.fetchProduct(this.productId, form);
-        } else {
-            form.render(this.addProduct.bind(this));
-        }
+    const html = `
+        <div class="create-edit-form">
+            <h1>${this.productId ? 'Редактировать продукт' : 'Создать продукт'}</h1>
+        </div>
+    `;
+    this.parent.insertAdjacentHTML('beforeend', html);
+    this.pageRoot = this.parent.querySelector('.create-edit-form');
 
-        // Добавляем кнопку назад
-        const backButton = this.parent.querySelector('.back-button');
-        if (backButton) {
-            backButton.addEventListener('click', this.clickBack.bind(this));
-        }
+    // Рендерим форму
+    const form = new ProductFormComponent(this.pageRoot);
+    if (this.productId) {
+        this.fetchProduct(this.productId, form);
+    } else {
+        form.render(this.addProduct.bind(this));
     }
+
+    // Используем BackButtonComponent
+    const backButton = new BackButtonComponent(this.pageRoot);
+    backButton.render(this.clickBack.bind(this));
+}
 
     async fetchProduct(id, form) {
         try {

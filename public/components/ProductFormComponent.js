@@ -5,7 +5,11 @@ export class ProductFormComponent {
 
     render(onSubmit, product = {}, onDelete = null) {
         const isEdit = !!product.id;
-        this.parent.innerHTML = `
+    
+        // Создаём обёртку для формы
+        const formWrapper = document.createElement('div');
+        formWrapper.className = 'form-wrapper';
+        formWrapper.innerHTML = `
             <form id="productForm" class="product-form">
                 <input type="text" name="title" placeholder="Название" value="${product.title || ''}" required />
                 <input type="text" name="src" placeholder="Ссылка на изображение" value="${product.src || ''}" required />
@@ -17,8 +21,17 @@ export class ProductFormComponent {
                 </div>
             </form>
         `;
-
-        const form = this.parent.querySelector('#productForm');
+    
+        // Удаляем старую форму, если есть (по желанию)
+        const oldFormWrapper = this.parent.querySelector('.form-wrapper');
+        if (oldFormWrapper) {
+            oldFormWrapper.remove();
+        }
+    
+        // Добавляем новую форму
+        this.parent.appendChild(formWrapper);
+    
+        const form = formWrapper.querySelector('#productForm');
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             const formData = new FormData(form);
@@ -30,9 +43,9 @@ export class ProductFormComponent {
             };
             onSubmit(productData);
         });
-
+    
         if (isEdit && onDelete) {
-            const deleteButton = this.parent.querySelector('#deleteButton');
+            const deleteButton = formWrapper.querySelector('#deleteButton');
             deleteButton.addEventListener('click', () => {
                 if (confirm('Вы уверены, что хотите удалить продукт?')) {
                     onDelete(product.id);
@@ -40,4 +53,5 @@ export class ProductFormComponent {
             });
         }
     }
+    
 }

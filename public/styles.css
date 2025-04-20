@@ -264,3 +264,29 @@ form button:hover {
     flex-wrap: wrap;
     gap: 20px;
 }
+
+/* Обертка кнопок на карточке продукта */
+.product-card .product-actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Стили для кнопки удаления в форме */
+.delete-button {
+    background-color: #d9534f;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.delete-button:hover {
+    background-color: #c9302c;
+}

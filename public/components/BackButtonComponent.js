@@ -4,7 +4,7 @@ export class BackButtonComponent {
     }
 
     render(clickCallback) {
-        const html = `<button id="backButton">Назад</button>`;
+        const html = `<button class="back-button" id="backButton">Назад</button>`;
         this.parent.insertAdjacentHTML('beforeend', html);
 
         const backButton = this.parent.querySelector('#backButton');

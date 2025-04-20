@@ -31,7 +31,7 @@ export class ProductDetailsPage {
                 <h2 class="product-title">${item.title}</h2>
                 <p class="product-description">${item.description}</p>
                 <p class="product-price">Price: $${item.price}</p>
-                <button id="backButton" class="back-button">Back</button>
+                <button id="backButton" class="back-button">Назад</button>
             </div>
         `;
         this.parent.innerHTML = '';
