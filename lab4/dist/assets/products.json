@@ -1,51 +1,58 @@
 [
-  {
-    "id": 1,
-    "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/gldn-MSFT-CP-Edge?wid=297&hei=167&fit=crop",
-    "title": "Microsoft Edge",
-    "description": "Быстрый и безопасный браузер с функциями для продуктивной работы.",
-    "price": 100
-  },
-  {
-    "id": 2,
-    "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/gldn-Soft-CP-OneDriveCampaignRefresh-2?wid=297&hei=167&fit=crop",
-    "title": "OneDrive",
-    "description": "Надежное облачное хранилище для ваших файлов и документов.",
-    "price": 200
-  },
-  {
-    "id": 3,
-    "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-SMB-OneNote?wid=297&hei=167&fit=crop",
-    "title": "OneNote",
-    "description": "Удобный инструмент для заметок и планирования задач.",
-    "price": 170
-  },
-  {
-    "id": 4,
-    "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-Bing?wid=297&hei=167&fit=crop",
-    "title": "Bing",
-    "description": "Поисковая система с мощными инструментами для исследований.",
-    "price": 150
-  },
-  {
-    "id": 5,
-    "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-Bing?wid=297&hei=167&fit=crop",
-    "title": "Eat Smart",
-    "description": "Приложение для здорового питания и планирования рациона.",
-    "price": 69
-  },
-  {
-    "id": 6,
-    "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-Bing?wid=297&hei=167&fit=crop",
-    "title": "Tea Time",
-    "description": "Сборник рецептов чая и советов по завариванию.",
-    "price": 96
-  },
-  {
-    "id": 7,
-    "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-Bing?wid=297&hei=167&fit=crop",
-    "title": "Ace Tools",
-    "description": "Коллекция профессиональных инструментов для мастеров.",
-    "price": 69
-  }
+    {
+        "id": 1,
+        "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/gldn-MSFT-CP-Edge?wid=297&hei=167&fit=crop",
+        "title": "Microsoft Edge",
+        "description": "Подробная информация по кнопке",
+        "price": 100
+    },
+    {
+        "id": 2,
+        "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/gldn-Soft-CP-OneDriveCampaignRefresh-2?wid=297&hei=167&fit=crop",
+        "title": "OneDrive",
+        "description": "Подробная информация по кнопке",
+        "price": 200
+    },
+    {
+        "id": 3,
+        "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-SMB-OneNote?wid=297&hei=167&fit=crop",
+        "title": "OneNote",
+        "description": "Подробная информация по кнопке",
+        "price": 170
+    },
+    {
+        "id": 4,
+        "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-Bing?wid=297&hei=167&fit=crop",
+        "title": "Bing",
+        "description": "Подробная информация по кнопке",
+        "price": 150
+    },
+    {
+        "id": 5,
+        "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-Bing?wid=297&hei=167&fit=crop",
+        "title": "eat",
+        "description": "Подробная информация по кнопке",
+        "price": 69
+    },
+    {
+        "id": 6,
+        "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-Bing?wid=297&hei=167&fit=crop",
+        "title": "tea",
+        "description": "Подробная информация по кнопке",
+        "price": 96
+    },
+    {
+        "id": 7,
+        "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-Bing?wid=297&hei=167&fit=crop",
+        "title": "ace",
+        "description": "Подробная информация по кнопке",
+        "price": 69
+    },
+    {
+        "id": 8,
+        "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-Bing?wid=297&hei=167&fit=crop",
+        "title": "eac",
+        "description": "Подробная информация по кнопке",
+        "price": 96
+    }
 ]
