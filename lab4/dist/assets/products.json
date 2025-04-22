@@ -4,14 +4,14 @@
     "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/gldn-MSFT-CP-Edge?wid=297&hei=167&fit=crop",
     "title": "Microsoft Edge",
     "description": "Быстрый, безопасный и современный браузер от Microsoft с функциями защиты конфиденциальности и интеграцией с Windows.",
-    "price": 100
+    "price": 101
   },
   {
     "id": 2,
     "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/gldn-Soft-CP-OneDriveCampaignRefresh-2?wid=297&hei=167&fit=crop",
-    "title": "April",
+    "title": "OneDrive",
     "description": "Надёжное облачное хранилище для файлов и документов, с возможностью совместного доступа и синхронизации.",
-    "price": 200
+    "price": 202
   },
   {
     "id": 3,
@@ -31,35 +31,21 @@
     "id": 5,
     "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-Bing?wid=297&hei=167&fit=crop",
     "title": "eat",
-    "description": "Интеллектуальная поисковая система от Microsoft с поддержкой ИИ и красивыми ежедневными фонами.",
+    "description": "Приложение для заказа еды и отслеживания рациона. Идеально подходит для гурманов и тех, кто считает калории.",
     "price": 69
   },
   {
     "id": 6,
     "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-Bing?wid=297&hei=167&fit=crop",
     "title": "tea",
-    "description": "Интеллектуальная поисковая система от Microsoft с поддержкой ИИ и красивыми ежедневными фонами.",
+    "description": "Каталог чая с информацией о сортах, вкусах и рецептах. Найди свой идеальный чайный момент.",
     "price": 96
   },
   {
     "id": 7,
     "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-Bing?wid=297&hei=167&fit=crop",
     "title": "ace",
-    "description": "Интеллектуальная поисковая система от Microsoft с поддержкой ИИ и красивыми ежедневными фонами.",
+    "description": "Минималистичный планировщик задач и целей. Упрощает фокус и помогает достигать успеха каждый день.",
     "price": 69
-  },
-  {
-    "id": 8,
-    "src": "https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Content-Card-PC-Bing?wid=297&hei=167&fit=crop",
-    "title": "eac",
-    "description": "Интеллектуальная поисковая система от Microsoft с поддержкой ИИ и красивыми ежедневными фонами.",
-    "price": 96
-  },
-  {
-    "src": "https://i.pinimg.com/736x/1e/a2/e1/1ea2e153f5b11a39aa4a42a409ac477d.jpg",
-    "title": "lambo",
-    "description": "Mr. Beast colab plz",
-    "price": 1500,
-    "id": 9
   }
 ]
