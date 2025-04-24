@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FileService = void 0;
+// src/file.service.ts
 const common_1 = require("@nestjs/common");
 const fs = require("fs");
 const path = require("path");
@@ -24,7 +25,7 @@ let FileService = class FileService {
         try {
             const data = fs.readFileSync(this.filePath, 'utf8');
             if (!data.trim()) {
-                return [];
+                return []; // Возвращаем пустой массив, если файл пустой
             }
             const parsedData = JSON.parse(data);
             if (!Array.isArray(parsedData)) {
@@ -33,9 +34,12 @@ let FileService = class FileService {
             return parsedData;
         }
         catch (error) {
-            if (error.code === 'ENOENT') {
-                console.error(`File not found: ${this.filePath}`);
-                return [];
+            if (error instanceof Error) {
+                const err = error;
+                if (err.code === 'ENOENT') {
+                    console.error(`File not found: ${this.filePath}`);
+                    return []; // Возвращаем пустой массив, если файл не найден
+                }
             }
             throw error;
         }
@@ -56,4 +60,3 @@ exports.FileService = FileService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [String])
 ], FileService);
-//# sourceMappingURL=file.service.js.map

@@ -10,13 +10,13 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Post()
-  create(@Body() createProductDto: CreateProductDto) {
-    return this.productsService.create(createProductDto);
+  create(@Body() dto: CreateProductDto) {
+    return this.productsService.create(dto);
   }
 
   @Get()
-  findAll(@Query('title') title?: string): Product[] {
-    return this.productsService.findAll(title);
+  findAll() {
+    return this.productsService.findAll();
   }
 
   @Get(':id')
@@ -25,14 +25,12 @@ export class ProductsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
-    this.productsService.update(+id, updateProductDto);
-    return { message: 'Updated successfully' };
+  update(@Param('id') id: string, @Body() dto: UpdateProductDto) {
+    return this.productsService.update(+id, dto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    this.productsService.remove(+id);
-    return { message: 'Deleted successfully' };
+    return this.productsService.remove(+id);
   }
 }

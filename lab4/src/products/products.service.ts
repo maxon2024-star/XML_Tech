@@ -11,18 +11,33 @@ export class ProductsService {
 
   create(createProductDto: CreateProductDto) {
     const products = this.fileService.read();
-    const product = { ...createProductDto, id: products.length + 1 };
+    const product: Product = {
+      ...createProductDto,
+      id: products.length + 1,
+    };
     this.fileService.add(product);
     return product;
   }
 
-  findAll(title?: string): Product[] {
+  findAll(title?: string, priceGte?: number, priceLte?: number): Product[] {
     const products = this.fileService.read();
-    return title
-      ? products.filter((product) =>
-          product.title.toLowerCase().includes(title.toLowerCase()),
-        )
-      : products;
+    let filteredProducts = products;
+
+    if (title) {
+      filteredProducts = filteredProducts.filter((product) =>
+        product.title.toLowerCase().includes(title.toLowerCase()),
+      );
+    }
+
+    if (priceGte !== undefined) {
+      filteredProducts = filteredProducts.filter((product) => product.price >= priceGte);
+    }
+
+    if (priceLte !== undefined) {
+      filteredProducts = filteredProducts.filter((product) => product.price <= priceLte);
+    }
+
+    return filteredProducts;
   }
 
   findOne(id: number): Product | null {

@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductsModule = void 0;
+// src/products/products.module.ts
 const common_1 = require("@nestjs/common");
 const products_controller_1 = require("./products.controller");
 const products_service_1 = require("./products.service");
@@ -26,4 +27,3 @@ exports.ProductsModule = ProductsModule = __decorate([
         ],
     })
 ], ProductsModule);
-//# sourceMappingURL=products.module.js.map

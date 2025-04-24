@@ -26,10 +26,13 @@ export class FileService<I> {
         throw new Error('File does not contain a valid array');
       }
       return parsedData as T;
-    } catch (error) {
-      if (error.code === 'ENOENT') {
-        console.error(`File not found: ${this.filePath}`);
-        return [] as T; // Возвращаем пустой массив, если файл не найден
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        const err = error as NodeJS.ErrnoException;
+        if (err.code === 'ENOENT') {
+          console.error(`File not found: ${this.filePath}`);
+          return [] as T; // Возвращаем пустой массив, если файл не найден
+        }
       }
       throw error;
     }

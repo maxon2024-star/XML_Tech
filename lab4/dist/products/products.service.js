@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductsService = void 0;
+// src/products/products.service.ts
 const common_1 = require("@nestjs/common");
 const file_service_1 = require("../file.service");
 let ProductsService = class ProductsService {
@@ -18,23 +19,32 @@ let ProductsService = class ProductsService {
     }
     create(createProductDto) {
         const products = this.fileService.read();
-        const product = { ...createProductDto, id: products.length + 1 };
+        const product = Object.assign(Object.assign({}, createProductDto), { id: products.length + 1 });
         this.fileService.add(product);
         return product;
     }
-    findAll(title) {
+    findAll(title, priceGte, priceLte) {
         const products = this.fileService.read();
-        return title
-            ? products.filter((product) => product.title.toLowerCase().includes(title.toLowerCase()))
-            : products;
+        let filteredProducts = products;
+        if (title) {
+            filteredProducts = filteredProducts.filter((product) => product.title.toLowerCase().includes(title.toLowerCase()));
+        }
+        if (priceGte !== undefined) {
+            filteredProducts = filteredProducts.filter((product) => product.price >= priceGte);
+        }
+        if (priceLte !== undefined) {
+            filteredProducts = filteredProducts.filter((product) => product.price <= priceLte);
+        }
+        return filteredProducts;
     }
     findOne(id) {
+        var _a;
         const products = this.fileService.read();
-        return products.find((product) => product.id === id) ?? null;
+        return (_a = products.find((product) => product.id === id)) !== null && _a !== void 0 ? _a : null;
     }
     update(id, updateProductDto) {
         const products = this.fileService.read();
-        const updatedProducts = products.map((product) => product.id === id ? { ...product, ...updateProductDto } : product);
+        const updatedProducts = products.map((product) => product.id === id ? Object.assign(Object.assign({}, product), updateProductDto) : product);
         this.fileService.write(updatedProducts);
     }
     remove(id) {
@@ -49,4 +59,3 @@ exports.ProductsService = ProductsService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [file_service_1.FileService])
 ], ProductsService);
-//# sourceMappingURL=products.service.js.map

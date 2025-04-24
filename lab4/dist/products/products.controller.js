@@ -13,6 +13,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductsController = void 0;
+// src/products/products.controller.ts
 const common_1 = require("@nestjs/common");
 const products_service_1 = require("./products.service");
 const create_product_dto_1 = require("./dto/create-product.dto");
@@ -21,22 +22,20 @@ let ProductsController = class ProductsController {
     constructor(productsService) {
         this.productsService = productsService;
     }
-    create(createProductDto) {
-        return this.productsService.create(createProductDto);
+    create(dto) {
+        return this.productsService.create(dto);
     }
-    findAll(title) {
-        return this.productsService.findAll(title);
+    findAll() {
+        return this.productsService.findAll();
     }
     findOne(id) {
         return this.productsService.findOne(+id);
     }
-    update(id, updateProductDto) {
-        this.productsService.update(+id, updateProductDto);
-        return { message: 'Updated successfully' };
+    update(id, dto) {
+        return this.productsService.update(+id, dto);
     }
     remove(id) {
-        this.productsService.remove(+id);
-        return { message: 'Deleted successfully' };
+        return this.productsService.remove(+id);
     }
 };
 exports.ProductsController = ProductsController;
@@ -49,10 +48,9 @@ __decorate([
 ], ProductsController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
-    __param(0, (0, common_1.Query)('title')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Array)
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
 ], ProductsController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
@@ -80,4 +78,3 @@ exports.ProductsController = ProductsController = __decorate([
     (0, common_1.Controller)('products'),
     __metadata("design:paramtypes", [products_service_1.ProductsService])
 ], ProductsController);
-//# sourceMappingURL=products.controller.js.map
