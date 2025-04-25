@@ -45,11 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
             productCard.innerHTML = `
                 <img src="${product.src}" alt="${product.title}">
                 <h2>${product.title}</h2>
-                <p>${product.description}</p>
-                <p>Price: $${product.price}</p>
+                <p>Цена: $${product.price}</p>
                 <div class="actions">
-                    <button class="edit" data-id="${product.id}">Edit</button>
-                    <button class="view" data-id="${product.id}">View Details</button>
+                    <button class="edit" data-id="${product.id}">Редактировать</button>
+                    <button class="view" data-id="${product.id}">Подробнее</button>
                 </div>
             `;
             productsContainer.appendChild(productCard);
@@ -138,9 +137,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Изменение заголовка страницы
         const pageTitle = document.querySelector('h1');
         if (productId) {
-            pageTitle.textContent = 'Edit Product';
+            pageTitle.textContent = 'Редактировать продукт';
         } else {
-            pageTitle.textContent = 'Add New Product';
+            pageTitle.textContent = 'Добавить новый продукт';
         }
         if (productId) {
             // Редактирование существующего продукта
@@ -245,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <img src="${product.src}" alt="${product.title}">
                         <h2>${product.title}</h2>
                         <p>${product.description}</p>
-                        <p>Price: $${product.price}</p>
+                        <p>Цена: $${product.price}</p>
                     `;
                 })
                 .catch(error => {
