@@ -1,7 +1,5 @@
-// frontend/bundle.js
 document.addEventListener('DOMContentLoaded', () => {
     const apiBaseUrl = 'http://localhost:3000/products';
-
     // Получение элементов DOM
     const productsContainer = document.getElementById('productsContainer');
     const addProductBtn = document.getElementById('addProductBtn');
@@ -9,11 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const maxPriceSlider = document.getElementById('maxPrice');
     const minPriceValue = document.getElementById('minPriceValue');
     const maxPriceValue = document.getElementById('maxPriceValue');
-
+    const editProductForm = document.getElementById('editProductForm');
     // Обработчики событий для слайдеров
-    minPriceSlider.addEventListener('input', updatePriceRange);
-    maxPriceSlider.addEventListener('input', updatePriceRange);
-
+    if (minPriceSlider && maxPriceSlider) {
+        minPriceSlider.addEventListener('input', updatePriceRange);
+        maxPriceSlider.addEventListener('input', updatePriceRange);
+    }
     // Функция для обновления значений слайдеров
     function updatePriceRange() {
         const minPrice = parseInt(minPriceSlider.value, 10);
@@ -22,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
         maxPriceValue.textContent = maxPrice;
         fetchProducts(minPrice, maxPrice);
     }
-
     // Функция для получения продуктов с учетом фильтрации по цене
     async function fetchProducts(minPrice = 0, maxPrice = 1000) {
         try {
@@ -34,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
             productsContainer.innerHTML = '<p>Error loading products. Please try again later.</p>';
         }
     }
-
     // Функция для отображения продуктов
     function renderProducts(products) {
         productsContainer.innerHTML = '';
@@ -52,13 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p>Price: $${product.price}</p>
                 <div class="actions">
                     <button class="edit" data-id="${product.id}">Edit</button>
-                    <button class="delete" data-id="${product.id}">Delete</button>
                     <button class="view" data-id="${product.id}">View Details</button>
                 </div>
             `;
             productsContainer.appendChild(productCard);
         });
-
         // Добавление обработчиков событий для кнопок
         const editButtons = document.querySelectorAll('.product-card .actions .edit');
         editButtons.forEach(button => {
@@ -67,15 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.location.href = `edit-product.html?id=${productId}`;
             });
         });
-
-        const deleteButtons = document.querySelectorAll('.product-card .actions .delete');
-        deleteButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const productId = button.getAttribute('data-id');
-                deleteProduct(productId);
-            });
-        });
-
         const viewButtons = document.querySelectorAll('.product-card .actions .view');
         viewButtons.forEach(button => {
             button.addEventListener('click', () => {
@@ -84,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-
     // Функция для удаления продукта
     async function deleteProduct(id) {
         try {
@@ -102,22 +87,20 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Error deleting product. Please try again later.');
         }
     }
-
     // Обработчик события для добавления нового продукта
-    addProductBtn.addEventListener('click', () => {
-        window.location.href = 'edit-product.html';
-    });
-
+    if (addProductBtn) {
+        addProductBtn.addEventListener('click', () => {
+            window.location.href = 'edit-product.html';
+        });
+    }
     // Инициализация страницы
     fetchProducts();
-
     // Функция для получения минимальной и максимальной цены
     async function fetchMinMaxPrices() {
         try {
             const response = await fetch(apiBaseUrl);
             const products = await response.json();
             if (products.length === 0) return { min: 0, max: 1000 };
-
             const prices = products.map(product => product.price);
             const minPrice = Math.min(...prices);
             const maxPrice = Math.max(...prices);
@@ -127,49 +110,61 @@ document.addEventListener('DOMContentLoaded', () => {
             return { min: 0, max: 1000 };
         }
     }
-
     // Установка начальных значений слайдеров
     fetchMinMaxPrices().then(({ min, max }) => {
-        minPriceSlider.min = min;
-        minPriceSlider.max = max;
-        maxPriceSlider.min = min;
-        maxPriceSlider.max = max;
-        minPriceSlider.value = min;
-        maxPriceSlider.value = max;
-        minPriceValue.textContent = min;
-        maxPriceValue.textContent = max;
-        fetchProducts(min, max);
+        if (minPriceSlider && maxPriceSlider && minPriceValue && maxPriceValue) {
+            minPriceSlider.min = min;
+            minPriceSlider.max = max;
+            maxPriceSlider.min = min;
+            maxPriceSlider.max = max;
+            minPriceSlider.value = min;
+            maxPriceSlider.value = max;
+            minPriceValue.textContent = min;
+            maxPriceValue.textContent = max;
+            fetchProducts(min, max);
+        }
     });
-
     // Обработка формы редактирования продукта
-    const editProductForm = document.getElementById('editProductForm');
     if (editProductForm) {
         const productIdInput = document.getElementById('productId');
         const srcInput = document.getElementById('src');
         const titleInput = document.getElementById('title');
         const descriptionInput = document.getElementById('description');
         const priceInput = document.getElementById('price');
-
+        const deleteBtn = document.getElementById('deleteBtn');
+        const backBtn = document.getElementById('backBtn');
         const urlParams = new URLSearchParams(window.location.search);
         const productId = urlParams.get('id');
-
+        // Изменение заголовка страницы
+        const pageTitle = document.querySelector('h1');
+        if (productId) {
+            pageTitle.textContent = 'Edit Product';
+        } else {
+            pageTitle.textContent = 'Add New Product';
+        }
         if (productId) {
             // Редактирование существующего продукта
             fetch(`${apiBaseUrl}/${productId}`)
                 .then(response => response.json())
                 .then(product => {
-                    productIdInput.value = product.id;
-                    srcInput.value = product.src;
-                    titleInput.value = product.title;
-                    descriptionInput.value = product.description;
-                    priceInput.value = product.price;
+                    if (product) {
+                        productIdInput.value = product.id;
+                        srcInput.value = product.src;
+                        titleInput.value = product.title;
+                        descriptionInput.value = product.description;
+                        priceInput.value = product.price;
+                    } else {
+                        console.error('Product not found:', product);
+                        alert('Product not found. Please try again later.');
+                        window.location.href = 'index.html';
+                    }
                 })
                 .catch(error => {
                     console.error('Error fetching product:', error);
                     alert('Error fetching product. Please try again later.');
+                    window.location.href = 'index.html';
                 });
         }
-
         editProductForm.addEventListener('submit', async (event) => {
             event.preventDefault();
             const productData = {
@@ -178,7 +173,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 description: descriptionInput.value,
                 price: parseFloat(priceInput.value),
             };
-
             if (productId) {
                 // Обновление существующего продукта
                 try {
@@ -221,14 +215,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
+        // Обработчик события для кнопки "Удалить"
+        if (deleteBtn) {
+            deleteBtn.addEventListener('click', () => {
+                if (productId) {
+                    deleteProduct(productId);
+                } else {
+                    alert('Product ID not found. Cannot delete product.');
+                }
+            });
+        }
+        // Обработчик события для кнопки "Назад"
+        if (backBtn) {
+            backBtn.addEventListener('click', () => {
+                window.location.href = 'index.html';
+            });
+        }
     }
-
     // Обработка страницы с подробной информацией о продукте
     const productDetailsDiv = document.getElementById('productDetails');
     if (productDetailsDiv) {
         const urlParams = new URLSearchParams(window.location.search);
         const productId = urlParams.get('id');
-
         if (productId) {
             fetch(`${apiBaseUrl}/${productId}`)
                 .then(response => response.json())
@@ -245,10 +253,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     productDetailsDiv.innerHTML = '<p>Error loading product details. Please try again later.</p>';
                 });
         }
-
         const backBtn = document.getElementById('backBtn');
-        backBtn.addEventListener('click', () => {
-            window.location.href = 'index.html';
-        });
+        if (backBtn) {
+            backBtn.addEventListener('click', () => {
+                window.location.href = 'index.html';
+            });
+        }
     }
 });

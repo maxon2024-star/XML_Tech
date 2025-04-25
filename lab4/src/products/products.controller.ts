@@ -10,27 +10,34 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Post()
-  create(@Body() dto: CreateProductDto) {
-    return this.productsService.create(dto);
+  async create(@Body() createProductDto: CreateProductDto): Promise<Product> {
+    return this.productsService.create(createProductDto);
   }
 
   @Get()
-  findAll() {
-    return this.productsService.findAll();
+  async findAll(
+    @Query('title') title?: string,
+    @Query('price_gte') priceGte?: number,
+    @Query('price_lte') priceLte?: number,
+  ): Promise<Product[]> {
+    return this.productsService.findAll(title, priceGte, priceLte);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string): Promise<Product | null> {
     return this.productsService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() dto: UpdateProductDto) {
-    return this.productsService.update(+id, dto);
+  async update(
+    @Param('id') id: string,
+    @Body() updateProductDto: UpdateProductDto,
+  ): Promise<Product | null> {
+    return this.productsService.update(+id, updateProductDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string): Promise<boolean> {
     return this.productsService.remove(+id);
   }
 }

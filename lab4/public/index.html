@@ -1,26 +1,27 @@
-<!-- index.html -->
+<!-- public/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Product List</title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Products</h1>
+        <h1>Product List</h1>
         <button id="addProductBtn">Add Product</button>
-        <div class="filters">
+        <div class="slider-container">
             <label for="minPrice">Min Price:</label>
-            <input type="range" id="minPrice" min="0" max="1000" value="0">
+            <input type="range" id="minPrice" name="minPrice" min="0" max="1000" value="0">
             <span id="minPriceValue">0</span>
+            <label for="space"> </label>
             <label for="maxPrice">Max Price:</label>
-            <input type="range" id="maxPrice" min="0" max="1000" value="1000">
+            <input type="range" id="maxPrice" name="maxPrice" min="0" max="1000" value="1000">
             <span id="maxPriceValue">1000</span>
         </div>
         <div id="productsContainer"></div>
     </div>
-    <script src="bundle.js"></script>
+    <script src="/bundle.js"></script>
 </body>
 </html>
