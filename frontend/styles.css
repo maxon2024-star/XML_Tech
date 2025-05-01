@@ -1,0 +1,263 @@
+/* styles.css */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f2f1;
+    color: #323130;
+}
+
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #106ebe;
+}
+
+.product-card {
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #ffffff;
+    transition: transform 0.2s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-card img {
+    max-width: 100%;
+    max-height: 200px;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.product-card h2 {
+    margin: 10px 0;
+    font-size: 1.2em;
+    color: #106ebe;
+}
+
+.product-card p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.actions {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.actions button {
+    margin: 5px 0;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%;
+    max-width: 200px;
+}
+
+.actions button.edit {
+    background-color: #106ebe;
+    color: white;
+}
+
+.actions button.edit:hover {
+    background-color: #0c5dbf;
+}
+
+.actions button.view {
+    background-color: #107c10;
+    color: white;
+}
+
+.actions button.view:hover {
+    background-color: #0c620c;
+}
+
+.actions button.delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+.actions button.delete:hover {
+    background-color: #c82333;
+}
+
+#productsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    justify-items: center;
+}
+
+#addProductBtn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #106ebe;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 200px;
+}
+
+#addProductBtn:hover {
+    background-color: #0c5dbf;
+}
+
+#editProductForm {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#editProductForm label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #106ebe;
+}
+
+#editProductForm input[type="text"],
+#editProductForm input[type="number"],
+#editProductForm textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    transition: border-color 0.2s;
+}
+
+#editProductForm input[type="text"]:focus,
+#editProductForm input[type="number"]:focus,
+#editProductForm textarea:focus {
+    border-color: #106ebe;
+}
+
+#editProductForm button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #107c10;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%;
+    max-width: 200px;
+}
+
+#editProductForm button[type="submit"]:hover {
+    background-color: #0c620c;
+}
+
+#editProductForm button[type="button"] {
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+    max-width: 200px;
+}
+
+#editProductForm button[type="button"]:hover {
+    background-color: #c82333;
+}
+
+#backBtn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #106ebe;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 200px;
+}
+
+#backBtn:hover {
+    background-color: #0c5dbf;
+}
+
+#productDetails {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+#productDetails img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+#productDetails h2 {
+    margin-bottom: 10px;
+    color: #106ebe;
+}
+
+#productDetails p {
+    margin: 5px 0;
+    color: #555;
+}
+
+/* Стили для слайдеров */
+.slider-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.slider-container label {
+    margin-right: 10px;
+    font-weight: bold;
+    color: #106ebe;
+}
+
+.slider-container input[type="range"] {
+    flex: 1;
+    max-width: 400px;
+    accent-color: #106ebe; /* Цвет ползунка слайдера */
+}
+
+.slider-container span {
+    margin-left: 10px;
+    font-size: 0.9em;
+    color: #555;
+}
