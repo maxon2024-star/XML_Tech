@@ -1,25 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products</title>
+    <title>Продукты</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Products</h1>
-        <button id="addProductBtn">Add Product</button>
-        <div class="filters">
-            <label for="minPrice">Min Price:</label>
+        <h1>Продукты</h1>
+        <button id="addProductBtn">Добавить продукт</button>
+        <div class="slider-container">
+            <label for="minPrice">Минимальная цена:</label>
             <input type="range" id="minPrice" min="0" max="1000" value="0">
             <span id="minPriceValue">0</span>
-            <label for="maxPrice">Max Price:</label>
+            <span id="B"> </span>
+            <label for="maxPrice"> Максимальная цена:</label>
             <input type="range" id="maxPrice" min="0" max="1000" value="1000">
             <span id="maxPriceValue">1000</span>
         </div>
         <div id="productsContainer"></div>
     </div>
+
     <script src="scripts/api.js"></script>
     <script src="scripts/main.js"></script>
 </body>

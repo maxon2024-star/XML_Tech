@@ -1,4 +1,3 @@
-/* styles.css */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
@@ -31,6 +30,8 @@ h1 {
     text-align: center;
     background-color: #ffffff;
     transition: transform 0.2s;
+    width: 100%;
+    max-width: 250px;
 }
 
 .product-card:hover {
@@ -72,33 +73,12 @@ h1 {
     transition: background-color 0.2s;
     width: 100%;
     max-width: 200px;
-}
-
-.actions button.edit {
-    background-color: #106ebe;
+    background-color: #106ebe; /* Синий цвет */
     color: white;
 }
 
-.actions button.edit:hover {
-    background-color: #0c5dbf;
-}
-
-.actions button.view {
-    background-color: #107c10;
-    color: white;
-}
-
-.actions button.view:hover {
-    background-color: #0c620c;
-}
-
-.actions button.delete {
-    background-color: #dc3545;
-    color: white;
-}
-
-.actions button.delete:hover {
-    background-color: #c82333;
+.actions button:hover {
+    background-color: #0c5dbf; /* Темный синий цвет при наведении */
 }
 
 #productsContainer {
@@ -125,117 +105,6 @@ h1 {
     background-color: #0c5dbf;
 }
 
-#editProductForm {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #dcdcdc;
-    border-radius: 8px;
-    background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-#editProductForm label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #106ebe;
-}
-
-#editProductForm input[type="text"],
-#editProductForm input[type="number"],
-#editProductForm textarea {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #dcdcdc;
-    border-radius: 4px;
-    transition: border-color 0.2s;
-}
-
-#editProductForm input[type="text"]:focus,
-#editProductForm input[type="number"]:focus,
-#editProductForm textarea:focus {
-    border-color: #106ebe;
-}
-
-#editProductForm button[type="submit"] {
-    padding: 10px 20px;
-    background-color: #107c10;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    width: 100%;
-    max-width: 200px;
-}
-
-#editProductForm button[type="submit"]:hover {
-    background-color: #0c620c;
-}
-
-#editProductForm button[type="button"] {
-    padding: 10px 20px;
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
-    width: 100%;
-    max-width: 200px;
-}
-
-#editProductForm button[type="button"]:hover {
-    background-color: #c82333;
-}
-
-#backBtn {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background-color: #106ebe;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    width: 200px;
-}
-
-#backBtn:hover {
-    background-color: #0c5dbf;
-}
-
-#productDetails {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #dcdcdc;
-    border-radius: 8px;
-    background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-#productDetails img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-
-#productDetails h2 {
-    margin-bottom: 10px;
-    color: #106ebe;
-}
-
-#productDetails p {
-    margin: 5px 0;
-    color: #555;
-}
-
 /* Стили для слайдеров */
 .slider-container {
     display: flex;
@@ -260,4 +129,93 @@ h1 {
     margin-left: 10px;
     font-size: 0.9em;
     color: #555;
+}
+
+/* Стили для формы редактирования */
+#editForm {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#editForm label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #106ebe;
+    text-align: left;
+    width: 100%;
+}
+
+#editForm input[type="text"],
+#editForm input[type="number"],
+#editForm textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+#editForm input[type="text"]:focus,
+#editForm input[type="number"]:focus,
+#editForm textarea:focus {
+    border-color: #106ebe;
+}
+
+#editForm button[type="submit"],
+#editForm button[type="button"] {
+    margin: 10px 0;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%;
+    max-width: 200px;
+}
+
+#editForm button[type="submit"] {
+    background-color: #107c10;
+    color: white;
+}
+
+#editForm button[type="submit"]:hover {
+    background-color: #0c620c;
+}
+
+#editForm button[type="button"] {
+    background-color: #dc3545;
+    color: white;
+}
+
+#editForm button[type="button"]:hover {
+    background-color: #c82333;
+}
+
+/* Стили для кнопки назад на странице редактирования */
+#backBtn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #106ebe; /* Синий цвет */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 200px;
+}
+
+#backBtn:hover {
+    background-color: #0c5dbf; /* Темный синий цвет при наведении */
 }

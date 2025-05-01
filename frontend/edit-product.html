@@ -1,93 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Редактирование продукта</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Редактирование продукта</h1>
-    <form id="editForm">
-        <input type="hidden" id="productId">
-        <label>Изображение: <input type="text" id="src"></label>
-        <label>Название: <input type="text" id="title"></label>
-        <label>Описание: <textarea id="description"></textarea></label>
-        <label>Цена: <input type="number" id="price"></label>
-        <button type="submit">Сохранить</button>
-        <button type="button" onclick="deleteProduct()">Удалить</button>
-    </form>
+    <div class="container">
+        <h1>Редактирование продукта</h1>
+        <div class="edit-card">
+            <form id="editForm">
+                <input type="hidden" id="productId">
+                <label>Изображение: <input type="text" id="src" required></label>
+                <label>Название: <input type="text" id="title" required></label>
+                <label>Описание: <textarea id="description" required></textarea></label>
+                <label>Цена: <input type="number" id="price" required></label>
+                <button type="submit">Сохранить</button>
+                <button type="button" id="deleteBtn">Удалить</button>
+                <button type="b" id="backBtn">Назад</button>
+            </form>
+        </div>
+    </div>
 
     <script src="scripts/api.js"></script>
-    <script>
-        // Получаем параметры URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const productId = urlParams.get('id');
-
-        // Функция для загрузки продукта по ID
-        function loadProduct() {
-            if (!productId) return;
-            const url = `${API_BASE_URL}/${productId}`;
-            window.API.get(url, (err, product) => {
-                if (err) {
-                    alert(err.message);
-                    return;
-                }
-                document.getElementById('src').value = product.src;
-                document.getElementById('title').value = product.title;
-                document.getElementById('description').value = product.description;
-                document.getElementById('price').value = product.price;
-                document.getElementById('productId').value = product.id;
-            });
-        }
-
-        // Функция для отправки формы
-        document.getElementById('editForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const data = {
-                src: document.getElementById('src').value,
-                title: document.getElementById('title').value,
-                description: document.getElementById('description').value,
-                price: parseFloat(document.getElementById('price').value),
-            };
-            const productId = document.getElementById('productId').value;
-
-            if (productId) {
-                // Обновление продукта
-                const url = `${API_BASE_URL}/${productId}`;
-                window.API.patch(url, data, (err) => {
-                    if (err) {
-                        alert(err.message);
-                    } else {
-                        window.location.href = 'index.html';
-                    }
-                });
-            } else {
-                // Создание нового продукта
-                window.API.post(API_BASE_URL, data, (err) => {
-                    if (err) {
-                        alert(err.message);
-                    } else {
-                        window.location.href = 'index.html';
-                    }
-                });
-            }
-        });
-
-        // Функция удаления продукта
-        function deleteProduct() {
-            const productId = document.getElementById('productId').value;
-            if (!productId) return;
-            const url = `${API_BASE_URL}/${productId}`;
-            window.API.del(url, (err) => {
-                if (err) {
-                    alert(err.message);
-                } else {
-                    window.location.href = 'index.html';
-                }
-            });
-        }
-
-        // Загрузка данных при старте страницы
-        loadProduct();
-    </script>
+    <script src="scripts/edit.js"></script>
 </body>
 </html>

@@ -1,41 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Детали продукта</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Детали продукта</h1>
-    <div id="productDetails"></div>
-    <button onclick="window.history.back()">Назад</button>
+    <div class="container">
+        <h1>Детали продукта</h1>
+        <div id="productDetails"></div>
+        <button id="backBtn">Назад</button>
+    </div>
 
     <script src="scripts/api.js"></script>
-    <script>
-        // Получение параметров URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const productId = urlParams.get('id');
-
-        // Функция для загрузки деталей продукта
-        function loadProductDetails() {
-            if (!productId) return;
-            const url = `${API_BASE_URL}/${productId}`;
-            window.API.get(url, (err, product) => {
-                if (err) {
-                    document.getElementById('productDetails').innerHTML = 'Ошибка загрузки';
-                    return;
-                }
-                const details = `
-                    <h2>${product.title}</h2>
-                    <img src="${product.src}" alt="${product.title}">
-                    <p>${product.description}</p>
-                    <p>Цена: $${product.price}</p>
-                `;
-                document.getElementById('productDetails').innerHTML = details;
-            });
-        }
-
-        // Загрузка данных при старте страницы
-        loadProductDetails();
-    </script>
+    <script src="scripts/details.js"></script>
 </body>
 </html>

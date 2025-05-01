@@ -18,13 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
         fetchProducts(minPrice, maxPrice);
     }
 
-    // Функция для получения всех продуктов
+    // Функция для получения продуктов
     function fetchProducts(minPrice = 0, maxPrice = 1000) {
         const url = `${API_BASE_URL}?price_gte=${minPrice}&price_lte=${maxPrice}`;
         api.get(url, (err, products) => {
             if (err) {
                 console.error('Ошибка:', err.message);
-                productsContainer.innerHTML = 'Не удалось загрузить продукты';
+                productsContainer.innerHTML = '<p>Error loading products. Please try again later.</p>';
                 return;
             }
             renderProducts(products);
@@ -35,33 +35,22 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderProducts(products) {
         productsContainer.innerHTML = '';
         if (products.length === 0) {
-            productsContainer.innerHTML = 'Продукты не найдены';
+            productsContainer.innerHTML = '<p>Продукты не найдены</p>';
             return;
         }
         products.forEach(product => {
             const card = document.createElement('div');
             card.className = 'product-card';
             card.innerHTML = `
+                <img src="${product.src}" alt="${product.title}">
                 <h2>${product.title}</h2>
-                <p>${product.description}</p>
                 <p>Цена: $${product.price}</p>
-                <button onclick="window.location.href='product-details.html?id=${product.id}'">Подробнее</button>
-                <button onclick="window.location.href='edit-product.html?id=${product.id}'">Редактировать</button>
-                <button onclick="deleteProduct(${product.id})">Удалить</button>
+                <div class="actions">
+                    <button onclick="window.location.href='product-details.html?id=${product.id}'">Подробнее</button>
+                    <button onclick="window.location.href='edit-product.html?id=${product.id}'">Редактировать</button>
+                </div>
             `;
             productsContainer.appendChild(card);
-        });
-    }
-
-    // Функция для удаления продукта
-    function deleteProduct(id) {
-        const url = `${API_BASE_URL}/${id}`;
-        api.del(url, (err) => {
-            if (err) {
-                alert(err.message);
-                return;
-            }
-            fetchProducts();
         });
     }
 
