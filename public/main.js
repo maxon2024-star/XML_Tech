@@ -5,14 +5,6 @@ import { ProductDetailsPage } from './pages/ProductDetailsPage.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const app = document.getElementById('app');
-    
-    async function bootstrap() {
-        const app = await NestFactory.create(AppModule);
-        app.enableCors(); // разрешает CORS для всех источников
-        await app.listen(3000);
-      }
-      bootstrap();
-      
 
     function renderPage() {
         const hash = window.location.hash;
