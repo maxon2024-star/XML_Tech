@@ -134,12 +134,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const backBtn = document.getElementById('backBtn');
         const urlParams = new URLSearchParams(window.location.search);
         const productId = urlParams.get('id');
+        
         // Изменение заголовка страницы
         const pageTitle = document.querySelector('h1');
         if (productId) {
             pageTitle.textContent = 'Редактировать продукт';
+            // Показываем кнопку "Удалить" только при редактировании
+            deleteBtn.classList.remove('hidden');
         } else {
             pageTitle.textContent = 'Добавить новый продукт';
+            // Скрываем кнопку "Удалить" при создании нового продукта
+            deleteBtn.classList.add('hidden');
         }
         if (productId) {
             // Редактирование существующего продукта
