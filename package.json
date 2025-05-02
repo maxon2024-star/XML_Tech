@@ -4,7 +4,7 @@
     "description": "A simple Microsoft-like web app interacting with an API",
     "main": "main.js",
     "scripts": {
-        "start": "json-server --watch assets/products.json --port 3000"
+        "start": "nest start"
     },
     "dependencies": {
         "cors": "^2.8.5",

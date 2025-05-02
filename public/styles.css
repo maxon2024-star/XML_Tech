@@ -49,8 +49,7 @@ body {
     color: #5d5d5d; /* Светло-серый текст */
 }
 
-.product-card .edit-btn,
-.product-card .details-btn {
+.product-card .edit-btn {
     background-color: #0078d4;
     border: none;
     border-radius: 4px;
@@ -62,9 +61,23 @@ body {
     font-size: 14px;
 }
 
-.product-card .edit-btn:hover,
-.product-card .details-btn:hover {
+.product-card .edit-btn:hover {
     background-color: #005a9e;
+}
+.product-card .details-btn {
+    background-color: #107c10; /* Microsoft Fluent green */
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin: 5px;
+    font-size: 14px;
+}
+
+.product-card .details-btn:hover {
+    background-color: #0b6a0b;
 }
 
 h1 {
@@ -226,35 +239,96 @@ form button:hover {
 .create-edit-form .back-button {
     margin-top: 20px;
 }
-
-/* Стили для фильтрации по цене */
-.price-filter {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.price-filter label {
-    margin-right: 10px;
-    font-size: 16px;
-    color: #333;
-}
-
-.price-filter .slider {
-    width: 300px;
-    margin-right: 10px;
-}
-
-.price-filter .price-input {
-    width: 80px;
-    padding: 5px;
-    border: 1px solid #e1e1e1;
+.create-edit-form .delete-button {
+    background-color: #d83b01; /* Microsoft Fluent red */
+    border: none;
     border-radius: 4px;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
     font-size: 14px;
 }
 
-.price-filter span {
-    font-size: 16px;
-    color: #5d5d5d;
+.create-edit-form .delete-button:hover {
+    background-color: #a4262c;
+}
+.form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.form-footer {
+    margin-top: 10px;  /* Уменьшили отступ сверху */
+    text-align: center;
+}
+
+
+.price-filter {
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 16px;
+    border-radius: 8px;
+    background: #f3f3f3;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.price-slider-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 12px;
+}
+
+.price-input {
+    width: 80px;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    background: #fff;
+    transition: border-color 0.2s;
+}
+
+.price-input:focus {
+    border-color: #0078d4;
+    outline: none;
+}
+
+.slider {
+    width: 140px;
+    appearance: none;
+    height: 4px;
+    background: #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: background 0.3s;
+}
+
+.slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    background: #0078d4;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.slider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    background: #0078d4;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 /* Центрирование карточек продуктов */
@@ -264,3 +338,18 @@ form button:hover {
     flex-wrap: wrap;
     gap: 20px;
 }
+
+.add-button-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.edit-buttons-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    margin-top: 20px;
+}
+

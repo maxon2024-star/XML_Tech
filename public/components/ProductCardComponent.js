@@ -1,21 +1,20 @@
+// components/ProductCardComponent.js
 export class ProductCardComponent {
     constructor(parent) {
         this.parent = parent;
     }
 
-    render(product, clickCallback, editCallback, detailsCallback) {
+    render(product, editCallback, detailsCallback) {
         // Проверяем, есть ли src. Если нет, используем дефолтное изображение
         const src = product.src || 'https://via.placeholder.com/200x150?text=No+Image'; // Дефолтное изображение
 
         const html = `
             <div class="product-card" data-id="${product.id}">
-                <img src="${src}" alt="${product.title}" style="width: 100%; height: auto;">
-                <h2>${product.title}</h2>
-                <p>Цена: $${product.price}</p>
-                <div class="product-card-buttons">
-                    <button class="edit-btn">Редактировать</button>
-                    <button class="details-btn">Подробнее</button>
-                </div>
+                <img src="${src}" alt="${product.title}" class="product-image">
+                <h2 class="product-title">${product.title}</h2>
+                <p class="product-price">Price: $${product.price}</p>
+                <button class="edit-btn">Редактировать</button>
+                <button class="details-btn">Подробнее</button>
             </div>
         `;
         this.parent.insertAdjacentHTML('beforeend', html);

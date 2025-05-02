@@ -1,10 +1,18 @@
+// main.js
 import { HomePage } from './pages/HomePage.js';
-//import { ProductPage } from './pages/ProductPage.js';
 import { CreateEditProductPage } from './pages/CreateEditProductPage.js';
-import { ProductDetailsPage } from './pages/ProductDetailsPage.js'; // Импортируем новую страницу
+import { ProductDetailsPage } from './pages/ProductDetailsPage.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const app = document.getElementById('app');
+    
+    async function bootstrap() {
+        const app = await NestFactory.create(AppModule);
+        app.enableCors(); // разрешает CORS для всех источников
+        await app.listen(3000);
+      }
+      bootstrap();
+      
 
     function renderPage() {
         const hash = window.location.hash;
@@ -12,12 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (hash === '') {
             const homePage = new HomePage(app);
             homePage.render();
-        } else if (hash.startsWith('#product/')) {
-            const productId = hash.split('#product/')[1];
-            console.log('Clicked Product ID:', productId); // Добавлено для отладки
-        } else if (hash === '#create') {
-            const createProductPage = new CreateEditProductPage(app);
-            createProductPage.render();
         } else if (hash.startsWith('#edit/')) {
             const productId = hash.split('#edit/')[1];
             console.log('Edit Product ID:', productId); // Добавлено для отладки
@@ -28,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Product ID is undefined');
                 app.innerHTML = '<h1>Product not found</h1>';
             }
-        } else if (hash.startsWith('#details/')) { // Добавляем новый маршрут для подробной информации
+        } else if (hash.startsWith('#details/')) {
             const productId = hash.split('#details/')[1];
             console.log('Details Product ID:', productId); // Добавлено для отладки
             if (productId) {
@@ -38,6 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Product ID is undefined');
                 app.innerHTML = '<h1>Product not found</h1>';
             }
+        } else if (hash === '#create') {
+            const createProductPage = new CreateEditProductPage(app);
+            createProductPage.render();
         } else {
             app.innerHTML = '<h1>404 Not Found</h1>';
         }
