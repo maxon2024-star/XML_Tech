@@ -7,13 +7,13 @@ import * as express from 'express';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Включаем CORS
-  app.enableCors();
+  // Включаем CORS ИНАЧЕ ОН ПАДАЕТ
+//  app.enableCors();
 
   // Подключаем статику вручную
   app.use(express.static(join(__dirname, '..', 'public')));
 
   await app.listen(3000);
-  console.log(`App running at http://localhost:4000`);
+  console.log(`App running at http://localhost:3000`);
 }
 bootstrap();
