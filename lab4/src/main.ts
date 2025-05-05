@@ -14,6 +14,6 @@ async function bootstrap() {
   app.use(express.static(join(__dirname, '..', 'public')));
 
   await app.listen(3000);
-  console.log(`App running at http://localhost:3000`);
+  console.log(`App running at http://localhost:4000`);
 }
 bootstrap();
