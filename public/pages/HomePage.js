@@ -56,6 +56,9 @@ export class HomePage {
                     <input type="number" id="maxPriceInput" min="${this.minPrice}" max="${this.maxPrice}" 
                            value="${this.currentMaxPrice}" class="price-input">
                 </div>
+                <div class="filter-button-container">
+                    <button id="applyPriceFilter" class="apply-filter-btn">Применить фильтр</button>
+                </div>
             </div>
         `;
         this.pageRoot.insertAdjacentHTML('beforebegin', filterHtml);
@@ -64,41 +67,37 @@ export class HomePage {
         const rangeMax = document.getElementById('rangeMax');
         const minInput = document.getElementById('minPriceInput');
         const maxInput = document.getElementById('maxPriceInput');
+        const applyBtn = document.getElementById('applyPriceFilter');
     
-        const updateFilters = (min, max) => {
-            // Корректируем значения, если min > max
-            if (min > max) [min, max] = [max, min];
-            
-            // Обновляем текущие значения
-            this.currentMinPrice = min;
-            this.currentMaxPrice = max;
-            
-            // Обновляем элементы управления
-            rangeMin.value = min;
-            rangeMax.value = max;
-            minInput.value = min;
-            maxInput.value = max;
-            
-            // Отправляем запрос с новыми параметрами фильтрации
-            this.getData(min, max);
+        // Синхронизация между range и number
+        const syncInputs = () => {
+            minInput.addEventListener('input', () => {
+                rangeMin.value = minInput.value;
+            });
+            maxInput.addEventListener('input', () => {
+                rangeMax.value = maxInput.value;
+            });
+            rangeMin.addEventListener('input', () => {
+                minInput.value = rangeMin.value;
+            });
+            rangeMax.addEventListener('input', () => {
+                maxInput.value = rangeMax.value;
+            });
         };
     
-        rangeMin.addEventListener('input', () => {
-            updateFilters(parseInt(rangeMin.value), this.currentMaxPrice);
-        });
+        syncInputs();
     
-        rangeMax.addEventListener('input', () => {
-            updateFilters(this.currentMinPrice, parseInt(rangeMax.value));
-        });
+        applyBtn.addEventListener('click', () => {
+            let min = parseInt(minInput.value) || this.minPrice;
+            let max = parseInt(maxInput.value) || this.maxPrice;
+            if (min > max) [min, max] = [max, min];
     
-        minInput.addEventListener('input', () => {
-            updateFilters(parseInt(minInput.value) || this.minPrice, this.currentMaxPrice);
-        });
-    
-        maxInput.addEventListener('input', () => {
-            updateFilters(this.currentMinPrice, parseInt(maxInput.value) || this.maxPrice);
+            this.currentMinPrice = min;
+            this.currentMaxPrice = max;
+            this.getData(min, max);
         });
     }
+  
     
     renderData(items) {
         this.pageRoot.innerHTML = '';

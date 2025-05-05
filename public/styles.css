@@ -353,3 +353,23 @@ form button:hover {
     margin-top: 20px;
 }
 
+.filter-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.apply-filter-btn {
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #4CAF50;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.apply-filter-btn:hover {
+    background-color: #45a049;
+}
