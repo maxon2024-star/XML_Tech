@@ -4,11 +4,21 @@
     "description": "A simple Microsoft-like web app interacting with an API",
     "main": "main.js",
     "scripts": {
-        "start": "json-server --watch assets/products.json --port 3000"
+        "build": "webpack",
+        "dev": "webpack serve"
     },
     "dependencies": {
         "cors": "^2.8.5",
         "express": "^5.1.0",
         "json-server": "^0.17.0"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.27.1",
+        "@babel/preset-env": "^7.27.1",
+        "babel-loader": "^10.0.0",
+        "html-webpack-plugin": "^5.6.3",
+        "webpack": "^5.99.7",
+        "webpack-cli": "^6.0.1",
+        "webpack-dev-server": "^5.2.1"
     }
 }
