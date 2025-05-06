@@ -1,26 +1,26 @@
 class ProductUrls {
     constructor() {
-        this.baseUrl = 'http://localhost:3000';
+        this.baseUrl = 'http://localhost:3000/products';
     }
 
     getProducts() {
-        return `${this.baseUrl}/products`;
+        return `${this.baseUrl}`;
     }
 
     getProductById(id) {
-        return `${this.baseUrl}/products/${id}`;
+        return `${this.baseUrl}/${id}`;
     }
 
     createProduct() {
-        return `${this.baseUrl}/products`;
+        return `${this.baseUrl}`;
     }
 
     removeProductById(id) {
-        return `${this.baseUrl}/products/${id}`;
+        return `${this.baseUrl}/${id}`;
     }
 
     updateProductById(id) {
-        return `${this.baseUrl}/products/${id}`;
+        return `${this.baseUrl}/${id}`;
     }
 }
 

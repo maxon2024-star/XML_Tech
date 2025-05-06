@@ -16,7 +16,13 @@ export class HomePage {
 
     async getData() {
         try {
-            const response = await fetch(productUrls.getProducts());
+            const response = await fetch(productUrls.getProducts(), {
+                headers: {
+                    'Cache-Control': 'no-cache, no-store, must-revalidate',
+                    'Pragma': 'no-cache',
+                    'Expires': '0'
+                }
+            });
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
@@ -43,45 +49,75 @@ export class HomePage {
                     <input type="range" id="maxPrice" min="${this.minPrice}" max="${this.maxPrice}" value="${this.maxPrice}" step="1" class="slider">
                     <input type="number" id="maxPriceInput" min="${this.minPrice}" max="${this.maxPrice}" value="${this.maxPrice}" class="price-input">
                 </div>
+                <div style="display: flex; justify-content: center; margin-top: 10px;">
+                    <button id="applyPriceFilterBtn" class="apply-filter-btn">Применить фильтр</button>
+                </div>
             </div>
         `;
-        this.pageRoot.insertAdjacentHTML('beforebegin', filterHtml);
-    
+        this.parent.insertAdjacentHTML('afterbegin', filterHtml);
+
         const minRange = document.getElementById('minPrice');
         const maxRange = document.getElementById('maxPrice');
         const minInput = document.getElementById('minPriceInput');
         const maxInput = document.getElementById('maxPriceInput');
-    
-        const updateAll = (min, max) => {
-            if (min > max) [min, max] = [max, min];
-    
-            minRange.value = min;
-            maxRange.value = max;
-            minInput.value = min;
-            maxInput.value = max;
-    
-            const filteredItems = this.allItems.filter(item => item.price >= min && item.price <= max);
-            this.renderData(filteredItems);
+        const applyButton = document.getElementById('applyPriceFilterBtn');
+
+        const syncInputs = () => {
+            // Взаимное обновление range и number
+            minRange.value = minInput.value;
+            maxRange.value = maxInput.value;
         };
-    
-        const onInputChange = () => {
-            let min = parseInt(minRange.value);
-            let max = parseInt(maxRange.value);
-            updateAll(min, max);
-        };
-    
-        const onNumberChange = () => {
+
+        // Синхронизация ползунков и числовых полей при вводе
+        minRange.addEventListener('input', () => {
+            minInput.value = minRange.value;
+        });
+
+        maxRange.addEventListener('input', () => {
+            maxInput.value = maxRange.value;
+        });
+
+        minInput.addEventListener('input', () => {
+            minRange.value = minInput.value;
+        });
+
+        maxInput.addEventListener('input', () => {
+            maxRange.value = maxInput.value;
+        });
+
+        // Применение фильтра по кнопке
+        applyButton.addEventListener('click', () => {
             let min = parseInt(minInput.value) || this.minPrice;
             let max = parseInt(maxInput.value) || this.maxPrice;
-            updateAll(min, max);
-        };
-    
-        minRange.addEventListener('input', onInputChange);
-        maxRange.addEventListener('input', onInputChange);
-        minInput.addEventListener('input', onNumberChange);
-        maxInput.addEventListener('input', onNumberChange);
+
+            if (min > max) [min, max] = [max, min]; // автообмен
+
+            // Отправляем запрос с параметрами фильтрации
+            this.fetchFilteredProducts(min, max);
+        });
     }
-    
+
+    async fetchFilteredProducts(min, max) {
+        console.log(`Fetching filtered products with minPrice=${min} and maxPrice=${max}`);
+        try {
+            const response = await fetch(`${productUrls.getProducts()}?minPrice=${min}&maxPrice=${max}`, {
+                headers: {
+                    'Cache-Control': 'no-cache, no-store, must-revalidate',
+                    'Pragma': 'no-cache',
+                    'Expires': '0'
+                }
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            this.renderData(data);
+        } catch (error) {
+            console.error('Failed to fetch filtered products:', error);
+            this.parent.innerHTML = '<h1>Error loading filtered products</h1>';
+        }
+    }
+
     renderData(items) {
         this.pageRoot.innerHTML = ''; // Очищаем перед новым рендером
         const containerHtml = `
@@ -95,7 +131,12 @@ export class HomePage {
             const productCard = new ProductCardComponent(container);
             productCard.render(item, this.editProduct.bind(this), this.viewDetails.bind(this));
         });
+    
+        if (!this.pageRoot.isConnected) {
+            this.parent.appendChild(this.pageRoot);
+        }
     }
+    
 
     editProduct(id) {
         console.log('Edit Product ID:', id); // Добавлено для отладки
@@ -180,6 +221,7 @@ export class HomePage {
         `;
         this.parent.insertAdjacentHTML('beforeend', html);
         this.pageRoot = document.getElementById('productList');
+
         this.getData();
 
         const addButton = document.getElementById('addProductBtn');

@@ -1,69 +1,58 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  // Определяем режим сборки
-  mode: 'development', // Устанавливаем режим development
+  mode: 'development',
 
-  // Определяем входной точку
-  entry: './public/main.js', // Главный файл JavaScript
+  entry: './public/main.js',
 
-  // Определяем выходную директорию и имя файла
   output: {
-    path: path.resolve(__dirname, 'dist'), // Директория для сборки
-    filename: 'bundle.js', // Имя выходного файла
-    publicPath: '/', // Путь к ресурсам в режиме development
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+    clean: true,
   },
 
-  // Настройки модулей
   module: {
     rules: [
       {
-        test: /\.js$/, // Обрабатываем только .js файлы
-        exclude: /node_modules/, // Исключаем node_modules
+        test: /\.js$/,
+        exclude: /node_modules/,
         use: {
-          loader: 'babel-loader', // Транспиляция ES6+ кода
+          loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env'], // Поддержка современного JavaScript
+            presets: ['@babel/preset-env'],
           },
         },
       },
       {
-        test: /\.css$/, // Обработка CSS файлов
-        use: [MiniCssExtractPlugin.loader, 'css-loader'], // Используем MiniCssExtractPlugin и css-loader
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'], // CSS внутри JS
       },
     ],
   },
 
-  // Плагины
   plugins: [
     new HtmlWebpackPlugin({
-      template: './public/index.html', // Шаблон HTML
-      filename: 'index.html', // Имя выходного HTML файла
-    }),
-    new MiniCssExtractPlugin({
-      filename: 'styles.css', // Имя выходного CSS файла
+      template: './public/index.html',
+      inject: 'body',
+      scriptLoading: 'blocking',
     }),
   ],
 
-  // Разрешение путей
   resolve: {
-    extensions: ['.js'], // Автоматическое расширение для импортов
+    extensions: ['.js'],
   },
 
-  // Настройки для development
   devServer: {
     static: {
-      directory: path.join(__dirname, 'dist'), // Директория для статических файлов
+      directory: path.join(__dirname, 'dist'),
     },
-    port: 4000, // Порт, выбранный автоматически
-    open: true, // Открывает браузер автоматически
-    hot: true, // Горячая перезагрузка
-    compress: true, // Сжатие ответов
-    historyApiFallback: true, // Поддержка маршрутизации на стороне клиента
+    port: 4000,
+    open: true,
+    hot: true,
+    compress: true,
+    historyApiFallback: true,
   },
 
-  // Дополнительные настройки для development
-  devtool: 'inline-source-map', // Карты исходников для отладки
+  devtool: 'inline-source-map',
 };

@@ -1,5 +1,4 @@
 // main.js
-// public/main.js
 import './styles.css'; // Правильный путь к CSS-файлу
 import { HomePage } from './pages/HomePage.js';
 import { CreateEditProductPage } from './pages/CreateEditProductPage.js';
