@@ -8,7 +8,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   // Включаем CORS ИНАЧЕ ОН ПАДАЕТ
-//  app.enableCors();
+  app.enableCors();
 
   // Подключаем статику вручную
   app.use(express.static(join(__dirname, '..', 'public')));

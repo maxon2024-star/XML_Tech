@@ -7,8 +7,8 @@ const path_1 = require("path");
 const express = require("express");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
-    // Включаем CORS
-    //  app.enableCors();
+    // Включаем CORS ИНАЧЕ ОН ПАДАЕТ
+    app.enableCors();
     // Подключаем статику вручную
     app.use(express.static((0, path_1.join)(__dirname, '..', 'public')));
     await app.listen(3000);
