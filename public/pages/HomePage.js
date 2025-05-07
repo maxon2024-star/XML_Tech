@@ -57,7 +57,13 @@ export class HomePage {
         if (existingFilter) {
             existingFilter.remove(); // Удаляем существующий фильтр
         }
-
+    
+        // Создаём и вставляем заголовок ПЕРЕД фильтром
+        const headerHtml = `
+            <h1 class="products-header">Продукты</h1>
+        `;
+        this.parent.insertAdjacentHTML('afterbegin', headerHtml);
+    
         const filterHtml = `
             <div id="priceFilter" class="price-filter">
                 <label><strong>Диапазон цен:</strong></label>
@@ -78,8 +84,11 @@ export class HomePage {
                 </div>
             </div>
         `;
-        this.parent.insertAdjacentHTML('afterbegin', filterHtml);
+        // Вставляем фильтр после заголовка
+        const headerElement = this.parent.querySelector('.products-header');
+        headerElement.insertAdjacentHTML('afterend', filterHtml);
     
+        // Остальной код обработчиков событий остается без изменений
         const rangeMin = document.getElementById('rangeMin');
         const rangeMax = document.getElementById('rangeMax');
         const minInput = document.getElementById('minPriceInput');
@@ -117,7 +126,7 @@ export class HomePage {
             this.currentMaxPrice = max;
             this.getData(min, max);
         });
-
+    
         resetBtn.addEventListener('click', () => {
             this.currentMinPrice = this.minPrice;
             this.currentMaxPrice = this.maxPrice;
@@ -224,7 +233,6 @@ export class HomePage {
     render() {
         this.parent.innerHTML = '';
         const html = `
-            <h1>Продукты</h1>
             <div class="add-button-container">
                 <button class="add-btn">Добавить продукт</button>
             </div>
