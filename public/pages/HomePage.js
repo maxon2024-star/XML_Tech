@@ -1,8 +1,5 @@
 // pages/HomePage.js
 import { ProductCardComponent } from '../components/ProductCardComponent.js';
-import { BackButtonComponent } from '../components/BackButtonComponent.js'; // Импортируем компонент кнопки назад
-import { CreateEditProductPage } from '../pages/CreateEditProductPage.js'; // Импортируем страницу создания и редактирования
-import { ProductDetailsPage } from '../pages/ProductDetailsPage.js'; // Импортируем страницу подробной информации
 import { productUrls } from '../modules/productUrls.js';
 
 export class HomePage {
@@ -12,11 +9,22 @@ export class HomePage {
         this.allItems = []; // Сохраняем оригинальные данные
         this.minPrice = 0;
         this.maxPrice = 0;
+        this.currentMinPrice = 0;
+        this.currentMaxPrice = 0;
     }
 
-    async getData() {
+    async getData(minPrice = null, maxPrice = null) {
+        let url = productUrls.getProducts();
+        
+        // Добавляем параметры фильтрации, если они заданы
+        const params = new URLSearchParams();
+        if (minPrice !== null) params.append('price_gte', minPrice);
+        if (maxPrice !== null) params.append('price_lte', maxPrice);
+        
+        if (params.toString()) url += `?${params.toString()}`;
+
         try {
-            const response = await fetch(productUrls.getProducts(), {
+            const response = await fetch(url, {
                 headers: {
                     'Cache-Control': 'no-cache, no-store, must-revalidate',
                     'Pragma': 'no-cache',
@@ -27,116 +35,117 @@ export class HomePage {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             const data = await response.json();
-            this.allItems = data;
-            this.minPrice = Math.min(...data.map(p => p.price));
-            this.maxPrice = Math.max(...data.map(p => p.price));
-            this.renderPriceFilter();
-            this.renderData(data); // Изначально показываем все
+            this.allItems = data; // Сохраняем оригинальные данные
+            // При первом запросе (без фильтров) определяем диапазон цен
+            if (minPrice === null && maxPrice === null) {
+                this.minPrice = Math.min(...data.map(p => p.price));
+                this.maxPrice = Math.max(...data.map(p => p.price));
+                this.currentMinPrice = this.minPrice;
+                this.currentMaxPrice = this.maxPrice;
+                this.renderPriceFilter();
+            }
+            this.renderData(data);
         } catch (error) {
-            console.error('Failed to fetch products:', error);
-            this.parent.innerHTML = '<h1>Error loading products</h1>';
+            console.error('Error fetching products:', error);
+            this.pageRoot.innerHTML = '<p>Ошибка загрузки товаров</p>';
         }
     }
 
     renderPriceFilter() {
+        // Проверяем, существует ли уже элемент фильтра
+        const existingFilter = document.getElementById('priceFilter');
+        if (existingFilter) {
+            existingFilter.remove(); // Удаляем существующий фильтр
+        }
+
         const filterHtml = `
             <div id="priceFilter" class="price-filter">
-                <label><strong>Диапазон цен:</strong></label><br>
-                <div style="display: flex; justify-content: center; gap: 10px; align-items: center; flex-wrap: wrap;">
-                    <input type="number" id="minPriceInput" min="${this.minPrice}" max="${this.maxPrice}" value="${this.minPrice}" class="price-input">
-                    <input type="range" id="minPrice" min="${this.minPrice}" max="${this.maxPrice}" value="${this.minPrice}" step="1" class="slider">
+                <label><strong>Диапазон цен:</strong></label>
+                <div class="price-slider-row">
+                    <input type="number" id="minPriceInput" min="${this.minPrice}" max="${this.maxPrice}" 
+                           value="${this.currentMinPrice}" class="price-input">
+                    <input type="range" id="rangeMin" min="${this.minPrice}" max="${this.maxPrice}" 
+                           value="${this.currentMinPrice}" step="1" class="slider">
                     <span>до</span>
-                    <input type="range" id="maxPrice" min="${this.minPrice}" max="${this.maxPrice}" value="${this.maxPrice}" step="1" class="slider">
-                    <input type="number" id="maxPriceInput" min="${this.minPrice}" max="${this.maxPrice}" value="${this.maxPrice}" class="price-input">
+                    <input type="range" id="rangeMax" min="${this.minPrice}" max="${this.maxPrice}" 
+                           value="${this.currentMaxPrice}" step="1" class="slider">
+                    <input type="number" id="maxPriceInput" min="${this.minPrice}" max="${this.maxPrice}" 
+                           value="${this.currentMaxPrice}" class="price-input">
                 </div>
-                <div style="display: flex; justify-content: center; margin-top: 10px;">
-                    <button id="applyPriceFilterBtn" class="apply-filter-btn">Применить фильтр</button>
+                <div class="filter-button-container">
+                    <button id="applyPriceFilter" class="apply-filter-btn">Применить фильтр</button>
+                    <button id="resetPriceFilter" class="reset-filter-btn" style="margin-left: 10px;">Сбросить</button>
                 </div>
             </div>
         `;
         this.parent.insertAdjacentHTML('afterbegin', filterHtml);
-
-        const minRange = document.getElementById('minPrice');
-        const maxRange = document.getElementById('maxPrice');
+    
+        const rangeMin = document.getElementById('rangeMin');
+        const rangeMax = document.getElementById('rangeMax');
         const minInput = document.getElementById('minPriceInput');
         const maxInput = document.getElementById('maxPriceInput');
-        const applyButton = document.getElementById('applyPriceFilterBtn');
-
+        const applyBtn = document.getElementById('applyPriceFilter');
+        const resetBtn = document.getElementById('resetPriceFilter');
+    
+        // Синхронизация между range и number
         const syncInputs = () => {
-            // Взаимное обновление range и number
-            minRange.value = minInput.value;
-            maxRange.value = maxInput.value;
+            minInput.addEventListener('input', () => {
+                rangeMin.value = minInput.value;
+            });
+            maxInput.addEventListener('input', () => {
+                rangeMax.value = maxInput.value;
+            });
+            rangeMin.addEventListener('input', () => {
+                minInput.value = rangeMin.value;
+            });
+            rangeMax.addEventListener('input', () => {
+                maxInput.value = rangeMax.value;
+            });
         };
-
-        // Синхронизация ползунков и числовых полей при вводе
-        minRange.addEventListener('input', () => {
-            minInput.value = minRange.value;
-        });
-
-        maxRange.addEventListener('input', () => {
-            maxInput.value = maxRange.value;
-        });
-
-        minInput.addEventListener('input', () => {
-            minRange.value = minInput.value;
-        });
-
-        maxInput.addEventListener('input', () => {
-            maxRange.value = maxInput.value;
-        });
-
-        // Применение фильтра по кнопке
-        applyButton.addEventListener('click', () => {
+    
+        syncInputs();
+    
+        applyBtn.addEventListener('click', () => {
             let min = parseInt(minInput.value) || this.minPrice;
             let max = parseInt(maxInput.value) || this.maxPrice;
+            // Корректировка значений
+            min = Math.max(min, this.minPrice);
+            max = Math.min(max, this.maxPrice);
+            if (min > max) [min, max] = [max, min];
+    
+            this.currentMinPrice = min;
+            this.currentMaxPrice = max;
+            this.getData(min, max);
+        });
 
-            if (min > max) [min, max] = [max, min]; // автообмен
-
-            // Отправляем запрос с параметрами фильтрации
-            this.fetchFilteredProducts(min, max);
+        resetBtn.addEventListener('click', () => {
+            this.currentMinPrice = this.minPrice;
+            this.currentMaxPrice = this.maxPrice;
+            minInput.value = this.minPrice;
+            maxInput.value = this.maxPrice;
+            rangeMin.value = this.minPrice;
+            rangeMax.value = this.maxPrice;
+            this.getData(this.minPrice, this.maxPrice);
         });
     }
-
-    async fetchFilteredProducts(min, max) {
-        console.log(`Fetching filtered products with minPrice=${min} and maxPrice=${max}`);
-        try {
-            const response = await fetch(`${productUrls.getProducts()}?minPrice=${min}&maxPrice=${max}`, {
-                headers: {
-                    'Cache-Control': 'no-cache, no-store, must-revalidate',
-                    'Pragma': 'no-cache',
-                    'Expires': '0'
-                }
-            });
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            const data = await response.json();
-            this.renderData(data);
-        } catch (error) {
-            console.error('Failed to fetch filtered products:', error);
-            this.parent.innerHTML = '<h1>Error loading filtered products</h1>';
-        }
-    }
-
+    
     renderData(items) {
-        this.pageRoot.innerHTML = ''; // Очищаем перед новым рендером
-        const containerHtml = `
-            <div class="product-list-container">
-                <!-- Карточки продуктов будут вставляться сюда -->
-            </div>
-        `;
-        this.pageRoot.insertAdjacentHTML('beforeend', containerHtml);
-        const container = this.pageRoot.querySelector('.product-list-container');
+        this.pageRoot.innerHTML = '';
+        
+        if (!items || items.length === 0) {
+            this.pageRoot.innerHTML = '<p>Товары не найдены</p>';
+            return;
+        }
+        
+        const container = document.createElement('div');
+        container.className = 'product-list-container';
+        this.pageRoot.appendChild(container);
+        
         items.forEach((item) => {
             const productCard = new ProductCardComponent(container);
             productCard.render(item, this.editProduct.bind(this), this.viewDetails.bind(this));
         });
-    
-        if (!this.pageRoot.isConnected) {
-            this.parent.appendChild(this.pageRoot);
-        }
     }
-    
 
     editProduct(id) {
         console.log('Edit Product ID:', id); // Добавлено для отладки
@@ -181,7 +190,7 @@ export class HomePage {
 
     async updateProduct(updatedProduct) {
         try {
-            const response = await fetch(productUrls.updateProductById(this.productId), {
+            const response = await fetch(productUrls.updateProductById(updatedProduct.id), {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
@@ -216,15 +225,16 @@ export class HomePage {
         this.parent.innerHTML = '';
         const html = `
             <h1>Продукты</h1>
-            <button id="addProductBtn">Добавить продукт</button>
+            <div class="add-button-container">
+                <button class="add-btn">Добавить продукт</button>
+            </div>
             <div id="productList"></div>
         `;
         this.parent.insertAdjacentHTML('beforeend', html);
         this.pageRoot = document.getElementById('productList');
-
-        this.getData();
-
-        const addButton = document.getElementById('addProductBtn');
+        this.getData(); // Первоначальная загрузка данных
+    
+        const addButton = this.parent.querySelector('.add-btn');
         addButton.addEventListener('click', () => {
             this.renderForm();
         });
